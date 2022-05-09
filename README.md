@@ -1,11 +1,11 @@
 # FlightGear-project
-In this project we wil manage flight gear simulation. 
+In this project we will manage flight gear simulation. 
 # Agent :
-  Language : JAVA 
+  * Language : JAVA .
 # Back-End :
-  Language : JAVA
+  * Language : JAVA .
 # Front_end :
-  Language : Js 
-  Library : React 
+  * Language : Js .
+  * Library : React . 
   
    
