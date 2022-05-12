@@ -1,4 +1,4 @@
-package com.flightgearserver.demo;
+package com.flightgearserver.demo.Storage;
 
 
 
@@ -28,6 +28,8 @@ public class StorageController {
         BlobId blobId=BlobId.of("flightgear-storage",Filename);
         BlobInfo blobInfo=BlobInfo.newBuilder(blobId).build();
         File fileToRead =new File("src/test.txt");
+        if(!fileToRead.exists())
+            return "file not found";
         byte[] data = Files.readAllBytes(Path.of(fileToRead.toURI()));
         storage.create(blobInfo,data);
         return "File uploaded!";
