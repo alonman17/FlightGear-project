@@ -1,38 +1,36 @@
 
   
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
  import style from './nav_bar.module.css';
- import SettingsIcon from '@mui/icons-material/Settings';
- import MapIcon from '@mui/icons-material/Map';
- import GroupIcon from '@mui/icons-material/Group';
- import DriveEtaIcon from '@mui/icons-material/DriveEta';
- import DataUsageIcon from '@mui/icons-material/DataUsage';
- import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
+ import ConnectingAirportsIcon from '@mui/icons-material/ConnectingAirports';
+ import SettingsRemoteIcon from '@mui/icons-material/SettingsRemote';
+ import MonitorIcon from '@mui/icons-material/Monitor';
  import DashboardIcon from '@mui/icons-material/Dashboard';
+ import TimelapseIcon from '@mui/icons-material/Timelapse';
 const sidebarNavItems = [
   
     {
         display: 'Fleet Overview',
-        icon: <MapIcon />,
+        icon: <ConnectingAirportsIcon />,
         to: '/fleet_overview',
         section: '/fleet_overview'
     },
     {
         display: 'Teleoperation',
-        icon: <DriveEtaIcon />,
+        icon: <SettingsRemoteIcon />,
         to: '/teleoperation',
         section: 'teleoperation'
     },
    {
         display: 'Monitoring',
-        icon: <DataUsageIcon />,
+        icon: <MonitorIcon />,
         to: '/monitoring',
         section: 'monitoring'
     },
     {
         display: 'Time Capsule',
-        icon: <SettingsIcon />,
+        icon: <TimelapseIcon />,
         to: '/Time_capsule',
         section: 'Time_capsule'
     },
