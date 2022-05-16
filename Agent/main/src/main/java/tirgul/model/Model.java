@@ -18,8 +18,13 @@ public class Model extends Observable {
     Socket fg;
     PrintWriter out2fg;
 
+
     public Model(String fileName) {
+
         properties = new HashMap<>();
+        Thread t = new AgentServer(8080);
+        t.start();
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
             String line;
@@ -34,10 +39,14 @@ public class Model extends Observable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         int port = Integer.parseInt(properties.get("port"));
         try {
+            
             fg = new Socket(properties.get("ip"), port);
             out2fg = new PrintWriter(fg.getOutputStream());
+
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -73,8 +82,10 @@ public class Model extends Observable {
     @Override
     public void finalize() {
         try {
+
             fg.close();
             out2fg.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

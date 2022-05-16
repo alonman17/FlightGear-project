@@ -1,10 +1,15 @@
 package tirgul.view;
 
+import tirgul.model.AgentServer;
+import tirgul.model.ClientHandler;
 import tirgul.model.Model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+
+
 
 public class Cli implements Icli {
     Model m;
@@ -85,6 +90,8 @@ public class Cli implements Icli {
         setRudder(0);
         setElevator(0);
         setThruttle("0");
+        ClientHandler.stop =true;
+        AgentServer.stop = true;
     }
 
     @Override
