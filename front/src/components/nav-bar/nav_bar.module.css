@@ -1,0 +1,53 @@
+.sidebar {
+    position: fixed;
+    height: 100vh;
+    width: 20vh;
+    background-color: rgb(45, 43, 43);
+    z-index: 10000000;
+  }
+  .topBar{
+      position: absolute;
+      width:1000vh;
+      top:0;
+      height: 5vh;
+      background-color: rgb(45, 43, 43) ;
+  }
+   .logo {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      place-items: center;
+      height: 200px;
+      margin-top: 0vh;
+      font-size: 2rem;
+      font-weight: 500;
+      color:wheat;
+      font-family: 'Mochiy Pop P one', sans-serif;
+      
+  }    
+  .logo:hover{
+      opacity: 0.7;
+  }
+  .item {
+      position: relative;
+      display: flex;
+      height:4rem;
+      align-items: center;
+      place-content: flex-start;
+      padding-left:  1rem;
+      margin: 1rem;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: white;
+      transition: color 0.4s ease-in-out;
+  }
+  .item:hover{  
+      padding: 10px;
+      color: rgb(122, 249, 249);
+  }
+  
+  
+  .i {
+      font-size: 1.75rem;
+  }
+  
