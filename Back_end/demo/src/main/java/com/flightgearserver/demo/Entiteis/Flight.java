@@ -12,6 +12,11 @@ public class Flight {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id", nullable = false)
+    private Aircraft aircrafts;
+
     @Column(name = "starttime")
     private LocalTime starttime;
 
@@ -29,12 +34,23 @@ public class Flight {
     @Column(name = "endpoint")
     private String endpoint;
 
+    @Column(name = "aircraftid")
+    private Integer aircraftid;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Aircraft getAircrafts() {
+        return aircrafts;
+    }
+
+    public void setAircrafts(Aircraft aircrafts) {
+        this.aircrafts = aircrafts;
     }
 
     public LocalTime getStarttime() {
@@ -75,6 +91,14 @@ public class Flight {
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
+    }
+
+    public Integer getAircraftid() {
+        return aircraftid;
+    }
+
+    public void setAircraftid(Integer aircraftid) {
+        this.aircraftid = aircraftid;
     }
 
 }

@@ -2,9 +2,7 @@ package com.flightgearserver.demo.Utils;
 
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,47 +11,51 @@ public class TimeSeries {
 
 	List<String> colName;
 	ArrayList<ArrayList<Float>> data ;
-	public TimeSeries(String colNames) {
-		colName = new ArrayList<>();
-		data = new ArrayList<>();
-		String[] curRow = colNames.split(",");
-		for (int i = 0; i < curRow.length; i++) {
-			colName.add(curRow[i]);
-		}
-		//initializing each column in the data
-			for (int i = 0; i < curRow.length; i++) {
-				data.add(new ArrayList<Float>());
-			}
-	}
-	//TODO do we need csvfile constructor?
-//	public TimeSeries(String csvFileName) {
-//		try {
-//			BufferedReader br = new BufferedReader(new FileReader(csvFileName));
-//			String line;
-//			line = br.readLine();
-//			String[] curRow = line.split(",");
-//			//reading the col names into the colName list
-//			for (int i = 0; i < curRow.length; i++) {
-//				colName.add(curRow[i]);
-//			}
-//			//initializing each column in the data
+//	public TimeSeries(String colNames) {
+//		colName = new ArrayList<>();
+//		data = new ArrayList<>();
+//		String[] curRow = colNames.split(",");
+//		for (int i = 0; i < curRow.length; i++) {
+//			colName.add(curRow[i]);
+//		}
+//		//initializing each column in the data
 //			for (int i = 0; i < curRow.length; i++) {
 //				data.add(new ArrayList<Float>());
 //			}
-//			//adding the data to it's corresponding column
-//			while ((line = br.readLine()) != null) {
-//				int row = 0;
-//				curRow = line.split(",");
-//
-//				for (int i = 0; i < curRow.length; i++) {
-//						data.get(i).add(Float.parseFloat(curRow[i]));
-//				}
-//			}
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 //	}
+	//TODO do we need csvfile constructor?
+	public TimeSeries(String csvFileName) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(csvFileName));
+			String line;
+			line = br.readLine();
+			String[] curRow = line.split(",");
+			colName=new ArrayList<>();
+			data=new ArrayList<>();
+			//reading the col names into the colName list
+			for (int i = 0; i < curRow.length; i++) {
+				colName.add(curRow[i]);
+			}
+			//initializing each column in the data
+			for (int i = 0; i < curRow.length; i++) {
+				data.add(new ArrayList<Float>());
+			}
+			//adding the data to it's corresponding column
+			while ((line = br.readLine()) != null) {
+				int row = 0;
+				if(line.equals("done"))
+					break;
+				curRow = line.split(",");
+
+				for (int i = 0; i < curRow.length; i++) {
+						data.get(i).add(Float.parseFloat(curRow[i]));
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ArrayList<Float> getColByName(String name) {
 		int col = colName.indexOf(name);
@@ -99,15 +101,18 @@ public class TimeSeries {
 		}
 		StringBuilder sb=new StringBuilder();
 		colName.forEach((s)->sb.append(s+","));
-		sb.deleteCharAt(sb.length());
-		sb.setLength(0);
+		sb.deleteCharAt(sb.length()-1);
 		writer.println(sb);
-		for (int i = 0; i < colName.size(); i++) {
-			for (int j = 0; j < colName.size(); j++) {
-				sb.append(data.get(i).get(j)+" ");
+		sb.setLength(0);
+		for (int i = 0; i < data.get(0).size(); i++) {
+			for (int j = 0; j < data.size(); j++) {
+				sb.append(data.get(j).get(i)+",");
 			}
+			sb.deleteCharAt(sb.length()-1);
 			writer.println(sb);
 			sb.setLength(0);
 		}
+		writer.close();
+
 	}
 }

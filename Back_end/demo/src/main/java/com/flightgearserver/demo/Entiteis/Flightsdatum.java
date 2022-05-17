@@ -83,8 +83,8 @@ public class Flightsdatum {
     @Column(name = "\"indicated-turn-rate\"")
     private Double indicatedTurnRate;
 
-    @Column(name = "\"ndicated-speed-fpm\"")
-    private Double ndicatedSpeedFpm;
+    @Column(name = "\"indicated-speed-fpm\"")
+    private Double indicatedSpeedFpm;
 
     @Column(name = "\"timestamp\"")
     private Long timestamp;
@@ -289,12 +289,12 @@ public class Flightsdatum {
         this.indicatedTurnRate = indicatedTurnRate;
     }
 
-    public Double getNdicatedSpeedFpm() {
-        return ndicatedSpeedFpm;
+    public Double getIndicatedSpeedFpm() {
+        return indicatedSpeedFpm;
     }
 
-    public void setNdicatedSpeedFpm(Double ndicatedSpeedFpm) {
-        this.ndicatedSpeedFpm = ndicatedSpeedFpm;
+    public void setIndicatedSpeedFpm(Double indicatedSpeedFpm) {
+        this.indicatedSpeedFpm = indicatedSpeedFpm;
     }
 
     public Long getTimestamp() {
