@@ -1,5 +1,7 @@
 package com.flightgearserver.demo.Entiteis;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,10 +14,6 @@ public class Flight {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false)
-    private Aircraft aircrafts;
 
     @Column(name = "starttime")
     private LocalTime starttime;
@@ -27,11 +25,13 @@ public class Flight {
     private LocalDate date;
 
     @Lob
-    @Column(name = "startpoint")
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "startpoint",columnDefinition = "text")
     private String startpoint;
 
     @Lob
-    @Column(name = "endpoint")
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "endpoint",columnDefinition = "text")
     private String endpoint;
 
     @Column(name = "aircraftid")
@@ -43,14 +43,6 @@ public class Flight {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Aircraft getAircrafts() {
-        return aircrafts;
-    }
-
-    public void setAircrafts(Aircraft aircrafts) {
-        this.aircrafts = aircrafts;
     }
 
     public LocalTime getStarttime() {

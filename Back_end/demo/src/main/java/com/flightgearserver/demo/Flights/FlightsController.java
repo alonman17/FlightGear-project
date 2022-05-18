@@ -33,4 +33,5 @@ public class FlightsController {
     public List<Flightsdatum> getFightData(@PathVariable("id") Long id) {
         return service.getFightData(id);
     }
+
 }

@@ -5,14 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "flightsdata")
 public class Flightsdatum {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flightid")
-    private Flight flightid;
+    private Long flightid;
 
     @Column(name = "aileron")
     private Double aileron;
@@ -89,6 +90,38 @@ public class Flightsdatum {
     @Column(name = "\"timestamp\"")
     private Long timestamp;
 
+    public Flightsdatum(double[] arr, long flightid,long timeStamp) {
+        this.flightid=flightid;
+        this.timestamp=timeStamp;
+         aileron=arr[0];
+         elevator=arr[1];
+         rudder=arr[2];
+         flaps=arr[3];
+         throttle=arr[4];
+         rpm=arr[5];
+         speedbrake=arr[6];
+         indicatedSpeedKt=arr[7];
+         indicatedAltitudeFt=arr[8];
+         pressureAltFt=arr[9];
+         indicatedPitchDeg=arr[10];
+         indicatedRollDeg=arr[11];
+         internalPitchDeg=arr[12];
+         internalRollDeg=arr[13];
+         encoderIndicatedAltitudeFt=arr[14];
+         encoderPressureAltFt=arr[15];
+         gpsIndicatedAltitudeFt=arr[16];
+         indicatedGroundSpeedKt=arr[17];
+         indicatedVerticalSpeed=arr[18];
+         indicatedHeadingDeg=arr[19];
+         compassIndicatedHeadingDeg=arr[20];
+         indicatedSlipSkid=arr[21];
+         indicatedTurnRate=arr[22];
+         indicatedSpeedFpm=arr[23];
+    }
+
+    public Flightsdatum() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -97,11 +130,11 @@ public class Flightsdatum {
         this.id = id;
     }
 
-    public Flight getFlightid() {
+    public long getFlightid() {
         return flightid;
     }
 
-    public void setFlightid(Flight flightid) {
+    public void setFlightid(long flightid) {
         this.flightid = flightid;
     }
 

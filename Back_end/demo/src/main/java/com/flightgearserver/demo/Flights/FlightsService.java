@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,7 +31,11 @@ public class FlightsService {
         return flightsRepository.findById(id).orElse(new Flight());
     }
 
-    public List<Flightsdatum> getFightData( Long id){
-        return flightdataRepository.findAllById(Collections.singleton(id));
+    public List<Flightsdatum> getFightData(Long id){
+        return flightdataRepository.findAllFlightData(id);
+    }
+
+    public List<Flightsdatum> getData(){
+        return flightdataRepository.findAll();
     }
 }

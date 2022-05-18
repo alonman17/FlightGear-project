@@ -1,5 +1,7 @@
 package com.flightgearserver.demo.Entiteis;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,8 @@ public class Aircraft {
     private Long id;
 
     @Lob
-    @Column(name = "type")
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "type",columnDefinition = "text")
     private String type;
 
     @Column(name = "millage")

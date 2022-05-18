@@ -17,10 +17,10 @@ public class SimpleHandler implements ClientHandler {
         in=new BufferedReader(new InputStreamReader(inFromClient));
         writer.println("Welcome and bye bye!");
         writer.println("sleeping for 1 min");
-//        writer.println("set controls/flight/rudder 1");
-//        String line=null;
-//        while((line=in.readLine())!=null)
-//            logger.info(line);
+        writer.println("set controls/flight/rudder 1");
+        String line=null;
+        while((line=in.readLine())!=null)
+            logger.info(line);
         try {
             Thread.sleep(60000);
         } catch (InterruptedException e) {
