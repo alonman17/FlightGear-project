@@ -6,40 +6,44 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class GenericServer {
     ServerSocket theServer;
     ThreadPoolExecutor pool;
-    volatile boolean stop;
+    static volatile boolean stop;
     BlockingQueue blockingQueue;
     ClientHandler clientHandler;
     Logger logger= LoggerFactory.getLogger(this.getClass());
     public GenericServer() {
         blockingQueue=new ArrayBlockingQueue(10);
-        pool=new ThreadPoolExecutor(2,10,5, TimeUnit.SECONDS,blockingQueue);
+        pool=new ThreadPoolExecutor(10,10,5, TimeUnit.SECONDS,blockingQueue);
     }
 
 
-    private void startServer(int port, ClientHandler clientHandler) throws IOException {
-        theServer = new ServerSocket(port);
+    private void startServer(int port, ClientHandler clientHandler)  {
+        try {
+            theServer = new ServerSocket(port);
+        } catch (IOException e) {
+            logger.error("Error opening server on port: " + port);
+            logger.error(e.getMessage());
+        }
         logger.info("Server started on port: "+ port);
         while(!stop) {
             try {
                 Socket aClient = theServer.accept();
-                logger.info("input from :"+ aClient.getInetAddress());
+                logger.info("Client connected from " + aClient.getInetAddress()+":"+ aClient.getPort());
                 pool.execute(()-> {
                     try {
-                        clientHandler.handleClient(aClient.getInputStream(),aClient.getOutputStream());
+                        clientHandler.handleClient(aClient);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
             }
             catch (IOException e) {
+                logger.error("Connection lost");
+                logger.error(e.getMessage());
             }
         }
         try {
@@ -53,11 +57,7 @@ public class GenericServer {
     public void start(int port,ClientHandler clientHandler) {
         this.clientHandler=clientHandler;
         new Thread(()-> {
-            try {
-                startServer(port,clientHandler);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            startServer(port,clientHandler);
         }).start();
     }
 

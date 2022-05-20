@@ -67,7 +67,8 @@ public class TimeSeries {
 	}
 	public void addRow(String row){
 		String[] curRow = row.split(",");
-		for (int i = 0; i < curRow.length; i++) {
+		//TODO CHANGE BACK TO curRow.length!
+		for (int i = 0; i < 9; i++) {
 			data.get(i).add(Float.parseFloat(curRow[i]));
 		}
 	}
