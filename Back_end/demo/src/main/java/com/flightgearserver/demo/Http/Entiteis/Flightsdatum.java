@@ -1,4 +1,4 @@
-package com.flightgearserver.demo.Entiteis;
+package com.flightgearserver.demo.Http.Entiteis;
 
 import javax.persistence.*;
 

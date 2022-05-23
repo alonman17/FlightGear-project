@@ -1,6 +1,6 @@
-package com.flightgearserver.demo.Flights;
+package com.flightgearserver.demo.Http.Flights;
 
-import com.flightgearserver.demo.Entiteis.Flight;
+import com.flightgearserver.demo.Http.Entiteis.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

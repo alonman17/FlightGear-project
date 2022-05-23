@@ -1,8 +1,8 @@
-package com.flightgearserver.demo.Flights;
+package com.flightgearserver.demo.Http.Flights;
 
 
-import com.flightgearserver.demo.Entiteis.Flight;
-import com.flightgearserver.demo.Entiteis.Flightsdatum;
+import com.flightgearserver.demo.Http.Entiteis.Flight;
+import com.flightgearserver.demo.Http.Entiteis.Flightsdatum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +19,10 @@ public class FlightsController {
         this.service = service;
     }
 
-
     @GetMapping("api/flights/all")
     public List<Flight> getAllFlights(){
         return service.getAllFlights();
     }
-
     @GetMapping("api/flights/{id}")
     public Flight getFlight(@PathVariable("id") Long id){
         return service.getFlight(id);

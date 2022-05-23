@@ -1,6 +1,7 @@
 package com.flightgearserver.demo.agent;
 
 
+import org.aspectj.weaver.loadtime.Agent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,15 +17,11 @@ public class AgentServer {
     ServerSocket theServer;
     ThreadPoolExecutor pool;
     static volatile boolean stop;
-    AgentHandler agentHandler;
     Logger logger= LoggerFactory.getLogger(this.getClass());
     public AgentServer() {
         BlockingQueue blockingQueue=new ArrayBlockingQueue(10);
         pool=new ThreadPoolExecutor(10,10,5, TimeUnit.SECONDS,blockingQueue);
-        agentHandler=new AgentHandler();
     }
-
-
     private void startServer(int port)  {
         try {
             theServer = new ServerSocket(port);
@@ -37,9 +34,9 @@ public class AgentServer {
             try {
                 Socket aClient = theServer.accept();
                 logger.info("Agent connected from " + aClient.getInetAddress()+":"+ aClient.getPort());
-                Agent agent=new Agent(aClient);
-                AgentManager.getInstance().addAgent(agent);
-                pool.execute(()-> agentHandler.Handle(agent));
+                AgentHandler agentHandler=new AgentHandler(aClient.getInputStream(),aClient.getOutputStream());
+                AgentManager.getInstance().addAgent(agentHandler);
+                pool.execute(()-> agentHandler.Handle());
             }
             catch (IOException e) {
                 logger.error("Connection lost");

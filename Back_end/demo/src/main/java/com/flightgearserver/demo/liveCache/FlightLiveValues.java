@@ -23,4 +23,11 @@ public class FlightLiveValues {
     public void setSingleValue(String name,double value){
         values.put(name,value);
     }
+
+    public String getAllValues() {
+        StringBuilder stringBuilder=new StringBuilder();
+        values.values().forEach((v)->stringBuilder.append(v));
+        return  stringBuilder.toString();
+
+    }
 }

@@ -93,7 +93,7 @@ public class TimeSeries {
 	} //V1 OF TS
 	//TODO TESTING
 	public void exportToCsv(String FileName){
-		File csv=new File(FileName);
+		File csv=new File("src/main/resources/"+FileName);
 		PrintWriter writer=null;
 		try {
 			writer=new PrintWriter(csv);
@@ -115,5 +115,24 @@ public class TimeSeries {
 		}
 		writer.close();
 
+	}
+
+	public String exportToString() {
+
+		StringBuilder sb=new StringBuilder();
+		colName.forEach((s)->sb.append(s+","));
+		sb.deleteCharAt(sb.length()-1);
+
+		sb.setLength(0);
+		for (int i = 0; i < data.get(0).size(); i++) {
+			for (int j = 0; j < data.size(); j++) {
+				sb.append(data.get(j).get(i)+",");
+			}
+			sb.deleteCharAt(sb.length()-1);
+
+			sb.setLength(0);
+		}
+
+		return sb.toString();
 	}
 }

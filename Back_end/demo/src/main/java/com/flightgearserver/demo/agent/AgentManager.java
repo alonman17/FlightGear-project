@@ -1,12 +1,6 @@
 package com.flightgearserver.demo.agent;
 
-import com.flightgearserver.demo.Aircraft.AircraftService;
-
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.flightgearserver.demo.Http.Aircraft.AircraftService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +11,7 @@ import java.util.Map;
 
 public class AgentManager {
     private static AgentManager manager;
-    private Map<Integer, Agent> clients;
+    private Map<Integer, AgentHandler> clients;
     //TODO FIX THE SERVICE
     private AircraftService service;
     private int[] aircraftIds;
@@ -35,7 +29,7 @@ public class AgentManager {
         return manager;
     }
 
-    public void addAgent(Agent agent){
+    public void addAgent(AgentHandler agent){
         int id=findFreeAircraft();
         clients.put(id,agent);
     }
@@ -49,7 +43,7 @@ public class AgentManager {
         }
         return -1;
     }
-    public Agent getAgent(int id){
+    public AgentHandler getAgent(int id){
         return clients.get(id);
     }
 }

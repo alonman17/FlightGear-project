@@ -24,7 +24,7 @@ public class CurrentFlight {
     private Double compassIndicatedHeadingDeg;
     private Double indicatedSlipSkid;
     private Double indicatedTurnRate;
-    private Double ndicatedSpeedFpm;
+    private Double indicatedSpeedFpm;
     private Long timestamp;
 
     public Double getAileron() {
@@ -211,12 +211,12 @@ public class CurrentFlight {
         this.indicatedTurnRate = indicatedTurnRate;
     }
 
-    public Double getNdicatedSpeedFpm() {
-        return ndicatedSpeedFpm;
+    public Double getIndicatedSpeedFpm() {
+        return indicatedSpeedFpm;
     }
 
-    public void setNdicatedSpeedFpm(Double ndicatedSpeedFpm) {
-        this.ndicatedSpeedFpm = ndicatedSpeedFpm;
+    public void setIndicatedSpeedFpm(Double indicatedSpeedFpm) {
+        this.indicatedSpeedFpm = indicatedSpeedFpm;
     }
 
     public Long getTimestamp() {
@@ -225,5 +225,63 @@ public class CurrentFlight {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public void setALL(double[] arr){
+        aileron=arr[0];
+        elevator=arr[1];
+        rudder=arr[2];
+        flaps=arr[3];
+        throttle=arr[4];
+        rpm=arr[5];
+        speedbrake=arr[6];
+        indicatedSpeedKt=arr[7];
+        indicatedAltitudeFt=arr[8];
+        pressureAltFt=arr[9];
+        indicatedPitchDeg=arr[10];
+        indicatedRollDeg=arr[11];
+        internalPitchDeg=arr[12];
+        internalRollDeg=arr[13];
+        encoderIndicatedAltitudeFt=arr[14];
+        encoderPressureAltFt=arr[15];
+        gpsIndicatedAltitudeFt=arr[16];
+        indicatedGroundSpeedKt=arr[17];
+        indicatedVerticalSpeed=arr[18];
+        indicatedHeadingDeg=arr[19];
+        compassIndicatedHeadingDeg=arr[20];
+        indicatedSlipSkid=arr[21];
+        indicatedTurnRate=arr[22];
+        indicatedSpeedFpm=arr[23];
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentFlight{" +
+                "aileron=" + aileron +
+                ", elevator=" + elevator +
+                ", rudder=" + rudder +
+                ", flaps=" + flaps +
+                ", throttle=" + throttle +
+                ", rpm=" + rpm +
+                ", speedbrake=" + speedbrake +
+                ", indicatedSpeedKt=" + indicatedSpeedKt +
+                ", indicatedAltitudeFt=" + indicatedAltitudeFt +
+                ", pressureAltFt=" + pressureAltFt +
+                ", indicatedPitchDeg=" + indicatedPitchDeg +
+                ", indicatedRollDeg=" + indicatedRollDeg +
+                ", internalPitchDeg=" + internalPitchDeg +
+                ", internalRollDeg=" + internalRollDeg +
+                ", encoderIndicatedAltitudeFt=" + encoderIndicatedAltitudeFt +
+                ", encoderPressureAltFt=" + encoderPressureAltFt +
+                ", gpsIndicatedAltitudeFt=" + gpsIndicatedAltitudeFt +
+                ", indicatedGroundSpeedKt=" + indicatedGroundSpeedKt +
+                ", indicatedVerticalSpeed=" + indicatedVerticalSpeed +
+                ", indicatedHeadingDeg=" + indicatedHeadingDeg +
+                ", compassIndicatedHeadingDeg=" + compassIndicatedHeadingDeg +
+                ", indicatedSlipSkid=" + indicatedSlipSkid +
+                ", indicatedTurnRate=" + indicatedTurnRate +
+                ", indicatedSpeedFpm=" + indicatedSpeedFpm +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

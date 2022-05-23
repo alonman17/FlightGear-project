@@ -1,14 +1,13 @@
-package com.flightgearserver.demo.Flights;
+package com.flightgearserver.demo.Http.Flights;
 
 
-import com.flightgearserver.demo.Entiteis.Flight;
-import com.flightgearserver.demo.Entiteis.Flightsdatum;
-import com.flightgearserver.demo.Flightsdata.FlightdataRepository;
+import com.flightgearserver.demo.Http.Entiteis.Flight;
+import com.flightgearserver.demo.Http.Entiteis.Flightsdatum;
+import com.flightgearserver.demo.Http.Flightsdata.FlightdataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

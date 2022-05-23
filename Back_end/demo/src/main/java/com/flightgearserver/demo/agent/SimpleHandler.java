@@ -9,11 +9,12 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Date;
+import java.util.Scanner;
 
 
 public class SimpleHandler implements ClientHandler {
     PrintWriter writer;
-    BufferedReader in;
+    Scanner in;
     Logger logger= LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -21,20 +22,23 @@ public class SimpleHandler implements ClientHandler {
         TimeSeries ts = new TimeSeries("1,2,3,4,5,6,7,8,9");
         try{
             writer = new PrintWriter(aClient.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(aClient.getInputStream()));
+            in = new Scanner(new InputStreamReader(aClient.getInputStream()));
             String line = null;
-            while (!(line = in.readLine()).equals("done")){
+            while (in.hasNext()){
+                line=in.nextLine();
                 //ts.addRow(line);
                 logger.info(line);
             }
+            if (!aClient.isConnected()){
+                logger.error("CONNECTION LOST TO AGENT");
+            }
             logger.info("end of flight");
-            ts.exportToCsv(new Date().toLocaleString()+".txt");
+            ts.exportToCsv(String.valueOf(new Date().getTime())+".txt");
             writer.close();
                 in.close();
         } catch (IOException e) {
-            logger.error("CONNECTION LOST TO CLIENT");
-            logger.error(e.getMessage());
-            ts.exportToCsv(new Date()+".txt");
+
+
             logger.info("Thread name: " + Thread.currentThread().getName() + " has died");
         }
     }

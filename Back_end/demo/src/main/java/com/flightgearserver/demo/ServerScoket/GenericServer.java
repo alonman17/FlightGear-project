@@ -21,8 +21,6 @@ public class GenericServer {
         blockingQueue=new ArrayBlockingQueue(10);
         pool=new ThreadPoolExecutor(10,10,5, TimeUnit.SECONDS,blockingQueue);
     }
-
-
     private void startServer(int port, ClientHandler clientHandler)  {
         try {
             theServer = new ServerSocket(port);

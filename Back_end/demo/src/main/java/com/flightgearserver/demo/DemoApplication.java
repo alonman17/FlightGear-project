@@ -12,7 +12,7 @@ public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
         GenericServer server=new GenericServer();
-        //server.start(5400,new SimpleHandler());
+        server.start(5400,new SimpleHandler());
         AgentServer agentServer=new AgentServer();
         agentServer.start(5500);
     }
