@@ -1,24 +1,26 @@
 package com.flightgearserver.demo.agent;
 
 import com.flightgearserver.demo.Http.Aircraft.AircraftService;
+import com.flightgearserver.demo.Javafx.Model;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
 /**
  * Used to manage all the agents.
  */
 
-public class AgentManager {
+public class AgentManager extends Observable {
     private static AgentManager manager;
     private Map<Integer, AgentHandler> clients;
     //TODO FIX THE SERVICE
-    private AircraftService service;
+    //private AircraftService service;
     private int[] aircraftIds;
 
     private AgentManager() {
         clients=new HashMap<>();
-
         aircraftIds=new int[10];
     }
 
@@ -32,6 +34,8 @@ public class AgentManager {
     public void addAgent(AgentHandler agent){
         int id=findFreeAircraft();
         clients.put(id,agent);
+        setChanged();
+        notifyObservers();
     }
 
     private int findFreeAircraft(){

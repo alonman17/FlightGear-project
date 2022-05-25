@@ -29,7 +29,7 @@ public class AgentServer {
             logger.error("Error opening server on port: " + port);
             logger.error(e.getMessage());
         }
-        logger.info("Server started on port: "+ port);
+        logger.info("Agent Server started on port: "+ port);
         while(!stop) {
             try {
                 Socket aClient = theServer.accept();

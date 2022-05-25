@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.flightgearserver.demo.Javafx.Controllers.Controller">
+  <tabs>
+    <Tab text="Untitled Tab 1">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="38.0" layoutY="44.0" text="Air plane 1" />
+                  <Label layoutX="38.0" layoutY="78.0" text="Air plane 2" />
+                  <Label layoutX="38.0" layoutY="106.0" text="Air plane 3" />
+                  <Label layoutX="38.0" layoutY="136.0" text="Air plane 4" />
+                  <Label layoutX="38.0" layoutY="177.0" text="Air plane 1" />
+                  <Label layoutX="38.0" layoutY="210.0" text="Air plane 1" />
+                  <Label layoutX="38.0" layoutY="246.0" text="Air plane 1" />
+                  <Label layoutX="38.0" layoutY="280.0" text="Air plane 1" />
+                  <Label layoutX="38.0" layoutY="313.0" text="Air plane 1" />
+                  <Label layoutX="109.0" layoutY="14.0" text="Status" />
+                  <Circle fx:id="planeStatus1" fill="#1fffdf" layoutX="125.0" layoutY="53.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="322.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="298.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="264.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="228.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="186.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="87.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="115.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#1fffdf" layoutX="125.0" layoutY="145.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Untitled Tab 2">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

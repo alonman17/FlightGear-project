@@ -1,20 +1,19 @@
 package com.flightgearserver.demo;
 
-import com.flightgearserver.demo.ServerScoket.GenericServer;
+import com.flightgearserver.demo.Javafx.BackendApplication;
 import com.flightgearserver.demo.agent.AgentServer;
-import com.flightgearserver.demo.agent.SimpleHandler;
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class DemoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-        GenericServer server=new GenericServer();
-        server.start(5400,new SimpleHandler());
-        AgentServer agentServer=new AgentServer();
-        agentServer.start(5500);
+        //SpringApplication.run(DemoApplication.class, args);
+
+        Application.launch(BackendApplication.class,args);
+
     }
 
 }
