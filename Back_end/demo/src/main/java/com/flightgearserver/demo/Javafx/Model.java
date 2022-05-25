@@ -1,18 +1,35 @@
 package com.flightgearserver.demo.Javafx;
 
+import com.flightgearserver.demo.Javafx.Controllers.onlineController;
+import com.flightgearserver.demo.Javafx.Controllers.onlineWindowController;
 import com.flightgearserver.demo.agent.AgentManager;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Observable;
-import java.util.Observer;
 
-public class Model implements Observer {
+
+public class Model extends Observable implements PropertyChangeListener {
 
     AgentManager manager=AgentManager.getInstance();
-
-
-    @Override
-    public void update(Observable o, Object arg) {
+    private onlineWindowController windowController=new onlineWindowController();
+    int res;
+    public void getChangeStatus(){
+        res=1;
+        setChanged();
+        notifyObservers();
 
     }
 
+    public int getRes() {
+        return res;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        int newAircraft= Integer.valueOf(evt.getPropertyName());
+        //windowController.changeColor();
+        setChanged();
+        notifyObservers();
+    }
 }

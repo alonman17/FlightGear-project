@@ -16,6 +16,15 @@ public class AgentHandler {
     private Scanner in;
     private PrintWriter out;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     public TimeSeries getTs() {
         return ts;
     }
@@ -35,6 +44,7 @@ public class AgentHandler {
     Logger logger= LoggerFactory.getLogger(AgentHandler.class);
 
     public AgentHandler(InputStream in, OutputStream out) {
+        id=AgentManager.getInstance().addAgent(this);
         this.in = new Scanner(new InputStreamReader(in));
         this.out=new PrintWriter(out);
     }
@@ -46,23 +56,27 @@ public class AgentHandler {
     public void Handle(){
         //Runs in a new Thread to keep reading data in the background.
         logger.info("Reading data from agent");
-        new Thread(()->{
-            //while loop that handles data stream of the agent
-            while (in.hasNext()){
-                StringBuilder stringBuilder=new StringBuilder();
-                String line=in.nextLine();
-                //Assuming our lines comes out as valName:value,valName1:value1....
-                String[] values=line.split(",");
-                for (int i = 0; i < values.length; i++)
-                {
-                    String[] temp=values[i].split(":");
-                    flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
-                    stringBuilder.append(temp[1]+",");
+
+            new Thread(()->{
+                //while loop that handles data stream of the agent
+
+                while (in.hasNext()){
+                    StringBuilder stringBuilder=new StringBuilder();
+                    String line=in.nextLine();
+                    //Assuming our lines comes out as valName:value,valName1:value1....
+                    String[] values=line.split(",");
+                    for (int i = 0; i < values.length; i++)
+                    {
+                        String[] temp=values[i].split(":");
+                        flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
+                        stringBuilder.append(temp[1]+",");
+                    }
+                    stringBuilder.deleteCharAt(stringBuilder.length());
+                    ts.addRow(stringBuilder.toString());
                 }
-                stringBuilder.deleteCharAt(stringBuilder.length());
-                ts.addRow(stringBuilder.toString());
-            }
-        }).run();
+            }).run();
+
+
 
     }
 
@@ -74,6 +88,11 @@ public class AgentHandler {
         for (String line : lines) {
             writeToClient(line);
         }
+    }
+    public void close(){
+        in.close();
+        out.close();
+        AgentManager.getInstance().removeAgent(id);
     }
 
 }

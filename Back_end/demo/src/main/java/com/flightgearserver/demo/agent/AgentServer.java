@@ -8,19 +8,17 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.net.SocketException;
+import java.util.concurrent.*;
 
 public class AgentServer {
     ServerSocket theServer;
-    ThreadPoolExecutor pool;
+    ExecutorService pool;
     static volatile boolean stop;
     Logger logger= LoggerFactory.getLogger(this.getClass());
     public AgentServer() {
         BlockingQueue blockingQueue=new ArrayBlockingQueue(10);
-        pool=new ThreadPoolExecutor(10,10,5, TimeUnit.SECONDS,blockingQueue);
+        pool=Executors.newFixedThreadPool(10);
     }
     private void startServer(int port)  {
         try {
@@ -35,10 +33,9 @@ public class AgentServer {
                 Socket aClient = theServer.accept();
                 logger.info("Agent connected from " + aClient.getInetAddress()+":"+ aClient.getPort());
                 AgentHandler agentHandler=new AgentHandler(aClient.getInputStream(),aClient.getOutputStream());
-                AgentManager.getInstance().addAgent(agentHandler);
                 pool.execute(()-> agentHandler.Handle());
             }
-            catch (IOException e) {
+            catch (Exception e) {
                 logger.error("Connection lost");
                 logger.error(e.getMessage());
             }
@@ -46,6 +43,7 @@ public class AgentServer {
         try {
             theServer.close();
             this.stop();
+            pool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
         }

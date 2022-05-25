@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.flightgearserver.demo.Javafx.Controllers.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.flightgearserver.demo.Javafx.Controllers.onlineWindowController">
   <tabs>
     <Tab text="Untitled Tab 1">
       <content>
@@ -22,7 +20,7 @@
                   <Label layoutX="38.0" layoutY="280.0" text="Air plane 1" />
                   <Label layoutX="38.0" layoutY="313.0" text="Air plane 1" />
                   <Label layoutX="109.0" layoutY="14.0" text="Status" />
-                  <Circle fx:id="planeStatus1" fill="#1fffdf" layoutX="125.0" layoutY="53.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="planeStatus1" fill="green" layoutX="125.0" layoutY="53.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#1fffdf" layoutX="125.0" layoutY="322.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#1fffdf" layoutX="125.0" layoutY="298.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#1fffdf" layoutX="125.0" layoutY="264.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
@@ -31,6 +29,7 @@
                   <Circle fill="#1fffdf" layoutX="125.0" layoutY="87.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#1fffdf" layoutX="125.0" layoutY="115.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#1fffdf" layoutX="125.0" layoutY="145.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Button fx:id="btn" layoutX="274.0" layoutY="173.0" mnemonicParsing="false" onMouseClicked="#changeColor" text="change color" />
                </children></AnchorPane>
       </content>
     </Tab>
