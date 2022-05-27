@@ -15,7 +15,7 @@ public class AgentHandler {
     private FlightLiveValues flightLiveValues;
     private Scanner in;
     private PrintWriter out;
-
+    private volatile boolean stop=false;
     public int getId() {
         return id;
     }
@@ -45,8 +45,8 @@ public class AgentHandler {
 
     public AgentHandler(InputStream in, OutputStream out) {
         id=AgentManager.getInstance().addAgent(this);
-        this.in = new Scanner(new InputStreamReader(in));
-        this.out=new PrintWriter(out);
+        this.in = new Scanner(new BufferedInputStream(in));
+        this.out=new PrintWriter(out,true);
     }
 
     /**
@@ -60,7 +60,7 @@ public class AgentHandler {
             new Thread(()->{
                 //while loop that handles data stream of the agent
 
-                while (in.hasNext()){
+                while (!stop&&in.hasNext()){
                     StringBuilder stringBuilder=new StringBuilder();
                     String line=in.nextLine();
                     //Assuming our lines comes out as valName:value,valName1:value1....
@@ -90,9 +90,9 @@ public class AgentHandler {
         }
     }
     public void close(){
+        stop=true;
         in.close();
         out.close();
-        AgentManager.getInstance().removeAgent(id);
     }
 
 }

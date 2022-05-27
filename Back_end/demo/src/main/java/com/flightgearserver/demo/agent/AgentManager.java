@@ -1,7 +1,11 @@
 package com.flightgearserver.demo.agent;
 
+import com.flightgearserver.demo.Http.Aircraft.AircraftService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -18,7 +22,8 @@ public class AgentManager {
     private static AgentManager manager;
     private Map<Integer, AgentHandler> clients;
     //TODO FIX THE SERVICE
-    //private AircraftService service;
+//    @Autowired
+//    private AircraftService service;
     private int[] aircraftIds;
     int size=10;
 
@@ -40,6 +45,7 @@ public class AgentManager {
 
     public int addAgent(AgentHandler agent){
         int id=findFreeAircraft();
+        logger.info("Aircraft " + id + " just went online");
         clients.put(id,agent);
         return id;
     }
@@ -51,9 +57,10 @@ public class AgentManager {
                 if(aircraftIds[x]==1) {
                     continue;
                 }
-                support.firePropertyChange(String.valueOf(i),0,1);
-                aircraftIds[i]=1;
-                return i+1;
+                support.firePropertyChange(String.valueOf(x),0,1);
+                aircraftIds[x]=1;
+            System.out.println(x);
+                return x;
             }
         return -1;
     }
@@ -65,8 +72,11 @@ public class AgentManager {
     }
 
     public void removeAgent(int id) {
+        clients.get(id).close();
         clients.remove(id);
-        aircraftIds[id-1]=0;
+        logger.info("Aircraft " + id + " disconnected");
+        aircraftIds[id]=0;
         support.firePropertyChange(String.valueOf(id),1,0);
+
     }
 }

@@ -1,6 +1,7 @@
 package com.flightgearserver.demo.Javafx.Controllers;
 
-import com.flightgearserver.demo.Javafx.Model;
+import com.flightgearserver.demo.Javafx.Model.Model;
+import com.flightgearserver.demo.Javafx.View.onlineWindowController;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -20,7 +21,12 @@ public class onlineController implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(o==model){
-            wc.changeColor();
+            if (arg!=null)
+            wc.changeColor((int)arg);
+        }if(o==wc){
+            if (arg!=null)
+            model.disconnectAgent((int)arg);
         }
     }
+
 }

@@ -2,7 +2,8 @@ package com.flightgearserver.demo.Javafx;
 
 import com.flightgearserver.demo.DemoApplication;
 import com.flightgearserver.demo.Javafx.Controllers.onlineController;
-import com.flightgearserver.demo.Javafx.Controllers.onlineWindowController;
+import com.flightgearserver.demo.Javafx.View.onlineWindowController;
+import com.flightgearserver.demo.Javafx.Model.Model;
 import com.flightgearserver.demo.agent.AgentManager;
 import com.flightgearserver.demo.agent.AgentServer;
 import javafx.application.Application;
@@ -11,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxWeaver;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -35,7 +35,7 @@ public class BackendApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Path.of("src/main/java/com/flightgearserver/demo/Javafx/resources/Controller.fxml").toUri().toURL());
+        FXMLLoader fxmlLoader = new FXMLLoader(Path.of("C:\\Users\\alonm\\Desktop\\FlightGear-project\\Back_end\\demo\\src\\main\\java\\com\\flightgearserver\\demo\\Javafx\\resources\\Controller.fxml").toUri().toURL());
         Parent root = (Parent) fxmlLoader.load();
         onlineWindowController wc=fxmlLoader.getController();
         Model m=new Model();

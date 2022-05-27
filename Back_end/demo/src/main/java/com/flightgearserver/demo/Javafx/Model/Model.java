@@ -1,7 +1,6 @@
-package com.flightgearserver.demo.Javafx;
+package com.flightgearserver.demo.Javafx.Model;
 
-import com.flightgearserver.demo.Javafx.Controllers.onlineController;
-import com.flightgearserver.demo.Javafx.Controllers.onlineWindowController;
+import com.flightgearserver.demo.Javafx.View.onlineWindowController;
 import com.flightgearserver.demo.agent.AgentManager;
 
 import java.beans.PropertyChangeEvent;
@@ -29,6 +28,12 @@ public class Model extends Observable implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         int newAircraft= Integer.valueOf(evt.getPropertyName());
         //windowController.changeColor();
+        setChanged();
+        notifyObservers(newAircraft);
+    }
+
+    public void disconnectAgent(int id) {
+        manager.removeAgent(id);
         setChanged();
         notifyObservers();
     }
