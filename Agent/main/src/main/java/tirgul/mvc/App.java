@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import tirgul.model.AgentServer;
 import tirgul.view.Cli;
 
 import java.io.IOException;
@@ -24,9 +25,11 @@ public class App extends Application {
         scene = new Scene(root, 640, 480);
         stage.setScene(scene);
         stage.show();
-        PrimaryController pc = fxl.getController();
+        PrimaryController pc = new PrimaryController();
+        pc.paint();
         Cli cli = new Cli();
-        cli.start();
+        // cli.start();
+
     }
 
     static void setRoot(String fxml) throws IOException {
