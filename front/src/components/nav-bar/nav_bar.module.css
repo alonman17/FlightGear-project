@@ -6,19 +6,21 @@
     z-index: 10000000;
   }
   .topBar{
-      position: absolute;
+      position: fixed !important;
       width:1000vh;
       top:0;
       height: 5vh;
       background-color: rgb(45, 43, 43) ;
   }
    .logo {
+       position: relative;
       display: flex;
       flex-direction: column;
       padding: 0;
+      top:3vh;
       place-items: center;
       height: 200px;
-      margin-top: 0vh;
+      margin: 0vh;
       font-size: 2rem;
       font-weight: 500;
       color:wheat;
@@ -30,6 +32,8 @@
   }
   .item {
       position: relative;
+      top:-3.5vh;
+      right:0.8vw;
       display: flex;
       height:4rem;
       align-items: center;

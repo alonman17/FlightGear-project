@@ -53,10 +53,11 @@
     background-color: rgb(45, 43, 43) ;
 }
  .logo {
+   z-index: 10000000;
     display: grid;
     place-items: center;
     height: 120px;
-    margin-top: 2vh;
+    margin-top: 4vh;
     font-size: 2rem;
     font-weight: 500;
     color:wheat;
@@ -87,4 +88,37 @@
 
 .i {
     font-size: 1.75rem;
+}
+
+
+.leaflet-container {
+  width: 40vw;
+  height: 70vh;
+}
+
+.sidebarmap {
+  box-sizing: border-box;
+  padding: 2em;
+  width: 30vw;
+}
+
+.sidebarmap h2,
+.sidebarmap p,
+.sidebarmap ul {
+  text-align: left;
+}
+
+.sidebarmap h2 {
+  margin-top: 0;
+}
+
+.sidebarmap button {
+  width: 100%;
+  font-weight: bold;
+  padding: .8em 1em;
+}
+
+.sidebarmapMain{
+  display: flex;
+  text-align: center;
 }

@@ -25,7 +25,7 @@ class App extends React.Component {
           <Route exact path="/Time_capsule" element={<TimeCapsule />} />
           <Route exact path="/teleoperation" element={<Teleoperation />} />
           <Route exact path="/fleet_overview" element={<FleetOverview />} />
-          <Route exact path="/monitoring" element={<Monitoring />} />
+          <Route exact path="/monitoring/:id" element={<Monitoring />} />
         </Routes>
       </Router>
     );
