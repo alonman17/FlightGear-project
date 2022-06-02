@@ -1,2 +1,0 @@
-finish conection to ClientHandler (Create Option to Stop Socket)
-Get the first Data From FlightGear 

@@ -10,14 +10,15 @@ import java.net.SocketException;
 public class AgentServer {
 
     int port;
-    FgClient fgClient;
+    FgClientHandler fgClient;
     ServerSocket agentServer;
     Socket client;
+
     public boolean connected;
     static public volatile boolean stop = false;
 
     public AgentServer() {
-        fgClient = new FgClient();
+        fgClient = new FgClientHandler();
         connected = false;
     }
 
@@ -40,7 +41,7 @@ public class AgentServer {
                 connected = true;
                 try {
                     fgClient.handleClient(new InputStreamReader(client.getInputStream()),
-                            new OutputStreamWriter(client.getOutputStream()));
+                            new OutputStreamWriter(client.getOutputStream()), client);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -55,6 +56,13 @@ public class AgentServer {
 
     public void stopServer() {
         stop = true;
+        try {
+            client.close();
+            agentServer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isConnected() {

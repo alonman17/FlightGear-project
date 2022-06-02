@@ -16,10 +16,10 @@ public class Client {
     private PrintWriter out2fg;
     Socket client;
 
-    public Client(int port, String ip) {
+    public Client() {
         properties = new HashMap<>();
         try {
-            client = new Socket(ip, port);
+            client = new Socket("127.0.0.1", 5402);
             out2fg = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -41,6 +41,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendCommand2fg(String command, double value) {
+        out2fg.println(command + " " + value);
+        out2fg.flush();
     }
 
     public void setAileron(double x) {
