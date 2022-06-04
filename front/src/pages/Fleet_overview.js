@@ -1,5 +1,6 @@
 import Sidebar from "../components/nav-bar/nav_bar"
 import Map from "../components/map"
+import KPI from "../components/kpi"
 
 export default function FleetOverview (){
     return (<div >
@@ -9,9 +10,9 @@ export default function FleetOverview (){
         <h2 style={{position:'relative' , left:'11vw',top:'-7vh',fontSize:'2.2rem' }}>Live Air-Crafts Map</h2>
         <Map  />
     </div>
-    <div style={{position:'absolute' , right:'0%',top:'17%' }}>
-        <h2 style={{position:'relative' , right:'15vw',top:'-7vh',fontSize:'2.2rem' }}>KPI</h2>
-
+    <div style={{position:'absolute' , right:'0%',top:'17%' ,width:'40vw'}}>
+        <h2 style={{position:'relative' , right:'-10vw',top:'-7vh',fontSize:'2.2rem' }}>KPI</h2>
+        <KPI />
     </div>
 </div>)
 }
