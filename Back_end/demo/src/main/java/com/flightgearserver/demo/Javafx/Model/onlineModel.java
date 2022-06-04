@@ -11,18 +11,6 @@ import java.util.Observable;
 public class Model extends Observable implements PropertyChangeListener {
 
     AgentManager manager=AgentManager.getInstance();
-    private onlineWindowController windowController=new onlineWindowController();
-    int res;
-    public void getChangeStatus(){
-        res=1;
-        setChanged();
-        notifyObservers();
-
-    }
-
-    public int getRes() {
-        return res;
-    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

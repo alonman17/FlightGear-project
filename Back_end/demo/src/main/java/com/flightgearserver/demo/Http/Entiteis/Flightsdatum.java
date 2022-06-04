@@ -1,19 +1,22 @@
 package com.flightgearserver.demo.Http.Entiteis;
 
+import com.flightgearserver.demo.Http.Entiteis.Flight;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "flightsdata")
-public class Flightsdatum {
-
+@Table(name = "flightdata")
+public class Flightdatum {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flightid")
-    private Long flightid;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "flightid", nullable = false)
+    private Flight flightid;
+
+    @Column(name = "\"timestamp\"", nullable = false)
+    private Long timestamp;
 
     @Column(name = "aileron")
     private Double aileron;
@@ -27,100 +30,119 @@ public class Flightsdatum {
     @Column(name = "flaps")
     private Double flaps;
 
-    @Column(name = "throttle")
-    private Double throttle;
-
-    @Column(name = "rpm")
-    private Double rpm;
+    @Column(name = "slats")
+    private Double slats;
 
     @Column(name = "speedbrake")
     private Double speedbrake;
 
-    @Column(name = "\"indicated-speed-kt\"")
-    private Double indicatedSpeedKt;
+    @Column(name = "throttle0")
+    private Double throttle0;
 
-    @Column(name = "\"indicated-altitude-ft\"")
-    private Double indicatedAltitudeFt;
+    @Column(name = "throttle1")
+    private Double throttle1;
 
-    @Column(name = "\"pressure-alt-ft\"")
-    private Double pressureAltFt;
+    @Column(name = "engine_pump0")
+    private Double enginePump0;
 
-    @Column(name = "\"indicated-pitch-deg\"")
-    private Double indicatedPitchDeg;
+    @Column(name = "engine_pump1")
+    private Double enginePump1;
 
-    @Column(name = "\"indicated-roll-deg\"")
-    private Double indicatedRollDeg;
+    @Column(name = "electric_pump0")
+    private Double electricPump0;
 
-    @Column(name = "\"internal-pitch-deg\"")
-    private Double internalPitchDeg;
+    @Column(name = "electric_pump1")
+    private Double electricPump1;
 
-    @Column(name = "\"internal-roll-deg\"")
-    private Double internalRollDeg;
+    @Column(name = "external_power")
+    private Double externalPower;
 
-    @Column(name = "\"encoder-indicated-altitude-ft\"")
+    @Column(name = "apu_generator")
+    private Double apuGenerator;
+
+    @Column(name = "latitude_deg")
+    private Double latitudeDeg;
+
+    @Column(name = "longitude_deg")
+    private Double longitudeDeg;
+
+    @Column(name = "altitude_ft")
+    private Double altitudeFt;
+
+    @Column(name = "roll_deg")
+    private Double rollDeg;
+
+    @Column(name = "pitch_deg")
+    private Double pitchDeg;
+
+    @Column(name = "heading_deg")
+    private Double headingDeg;
+
+    @Column(name = "side_slip_deg")
+    private Double sideSlipDeg;
+
+    @Column(name = "airspeed_kt")
+    private Double airspeedKt;
+
+    @Column(name = "glideslope")
+    private Double glideslope;
+
+    @Column(name = "vertical_speed_fps")
+    private Double verticalSpeedFps;
+
+    @Column(name = "airspeed_indicator_indicated_speed_kt")
+    private Double airspeedIndicatorIndicatedSpeedKt;
+
+    @Column(name = "altimeter_indicated_altitude_ft")
+    private Double altimeterIndicatedAltitudeFt;
+
+    @Column(name = "altimeter_pressure_alt_ft")
+    private Double altimeterPressureAltFt;
+
+    @Column(name = "attitude_indicator_indicated_pitch_deg")
+    private Double attitudeIndicatorIndicatedPitchDeg;
+
+    @Column(name = "attitude_indicator_indicated_roll_deg")
+    private Double attitudeIndicatorIndicatedRollDeg;
+
+    @Column(name = "attitude_indicator_internal_pitch_deg")
+    private Double attitudeIndicatorInternalPitchDeg;
+
+    @Column(name = "attitude_indicator_internal_roll_deg")
+    private Double attitudeIndicatorInternalRollDeg;
+
+    @Column(name = "encoder_indicated_altitude_ft")
     private Double encoderIndicatedAltitudeFt;
 
-    @Column(name = "\"encoder-pressure-alt-ft\"")
+    @Column(name = "encoder_pressure_alt_ft")
     private Double encoderPressureAltFt;
 
-    @Column(name = "\"gps-indicated-altitude-ft\"")
+    @Column(name = "gps_indicated_altitude_ft")
     private Double gpsIndicatedAltitudeFt;
 
-    @Column(name = "\"indicated-ground-speed-kt\"")
-    private Double indicatedGroundSpeedKt;
+    @Column(name = "gps_indicated_ground_speed_kt")
+    private Double gpsIndicatedGroundSpeedKt;
 
-    @Column(name = "\"indicated-vertical-speed\"")
-    private Double indicatedVerticalSpeed;
+    @Column(name = "gps_indicated_vertical_speed")
+    private Double gpsIndicatedVerticalSpeed;
 
-    @Column(name = "\"indicated-heading-deg\"")
+    @Column(name = "indicated_heading_deg")
     private Double indicatedHeadingDeg;
 
-    @Column(name = "\"compass-indicated-heading-deg\"")
-    private Double compassIndicatedHeadingDeg;
+    @Column(name = "magnetic_compass_indicated_heading_deg")
+    private Double magneticCompassIndicatedHeadingDeg;
 
-    @Column(name = "\"indicated-slip-skid\"")
-    private Double indicatedSlipSkid;
+    @Column(name = "slip_skid_ball_indicated_slip_skid")
+    private Double slipSkidBallIndicatedSlipSkid;
 
-    @Column(name = "\"indicated-turn-rate\"")
-    private Double indicatedTurnRate;
+    @Column(name = "turn_indicator_indicated_turn_rate")
+    private Double turnIndicatorIndicatedTurnRate;
 
-    @Column(name = "\"indicated-speed-fpm\"")
-    private Double indicatedSpeedFpm;
+    @Column(name = "vertical_speed_indicator_indicated_speed_fpm")
+    private Double verticalSpeedIndicatorIndicatedSpeedFpm;
 
-    @Column(name = "\"timestamp\"")
-    private Long timestamp;
-
-    public Flightsdatum(double[] arr, long flightid,long timeStamp) {
-        this.flightid=flightid;
-        this.timestamp=timeStamp;
-         aileron=arr[0];
-         elevator=arr[1];
-         rudder=arr[2];
-         flaps=arr[3];
-         throttle=arr[4];
-         rpm=arr[5];
-         speedbrake=arr[6];
-         indicatedSpeedKt=arr[7];
-         indicatedAltitudeFt=arr[8];
-         pressureAltFt=arr[9];
-         indicatedPitchDeg=arr[10];
-         indicatedRollDeg=arr[11];
-         internalPitchDeg=arr[12];
-         internalRollDeg=arr[13];
-         encoderIndicatedAltitudeFt=arr[14];
-         encoderPressureAltFt=arr[15];
-         gpsIndicatedAltitudeFt=arr[16];
-         indicatedGroundSpeedKt=arr[17];
-         indicatedVerticalSpeed=arr[18];
-         indicatedHeadingDeg=arr[19];
-         compassIndicatedHeadingDeg=arr[20];
-         indicatedSlipSkid=arr[21];
-         indicatedTurnRate=arr[22];
-         indicatedSpeedFpm=arr[23];
-    }
-
-    public Flightsdatum() {
-    }
+    @Column(name = "engine_rpm")
+    private Double engineRpm;
 
     public Long getId() {
         return id;
@@ -130,12 +152,20 @@ public class Flightsdatum {
         this.id = id;
     }
 
-    public long getFlightid() {
+    public Flight getFlightid() {
         return flightid;
     }
 
-    public void setFlightid(long flightid) {
+    public void setFlightid(Flight flightid) {
         this.flightid = flightid;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Double getAileron() {
@@ -170,20 +200,12 @@ public class Flightsdatum {
         this.flaps = flaps;
     }
 
-    public Double getThrottle() {
-        return throttle;
+    public Double getSlats() {
+        return slats;
     }
 
-    public void setThrottle(Double throttle) {
-        this.throttle = throttle;
-    }
-
-    public Double getRpm() {
-        return rpm;
-    }
-
-    public void setRpm(Double rpm) {
-        this.rpm = rpm;
+    public void setSlats(Double slats) {
+        this.slats = slats;
     }
 
     public Double getSpeedbrake() {
@@ -194,60 +216,204 @@ public class Flightsdatum {
         this.speedbrake = speedbrake;
     }
 
-    public Double getIndicatedSpeedKt() {
-        return indicatedSpeedKt;
+    public Double getThrottle0() {
+        return throttle0;
     }
 
-    public void setIndicatedSpeedKt(Double indicatedSpeedKt) {
-        this.indicatedSpeedKt = indicatedSpeedKt;
+    public void setThrottle0(Double throttle0) {
+        this.throttle0 = throttle0;
     }
 
-    public Double getIndicatedAltitudeFt() {
-        return indicatedAltitudeFt;
+    public Double getThrottle1() {
+        return throttle1;
     }
 
-    public void setIndicatedAltitudeFt(Double indicatedAltitudeFt) {
-        this.indicatedAltitudeFt = indicatedAltitudeFt;
+    public void setThrottle1(Double throttle1) {
+        this.throttle1 = throttle1;
     }
 
-    public Double getPressureAltFt() {
-        return pressureAltFt;
+    public Double getEnginePump0() {
+        return enginePump0;
     }
 
-    public void setPressureAltFt(Double pressureAltFt) {
-        this.pressureAltFt = pressureAltFt;
+    public void setEnginePump0(Double enginePump0) {
+        this.enginePump0 = enginePump0;
     }
 
-    public Double getIndicatedPitchDeg() {
-        return indicatedPitchDeg;
+    public Double getEnginePump1() {
+        return enginePump1;
     }
 
-    public void setIndicatedPitchDeg(Double indicatedPitchDeg) {
-        this.indicatedPitchDeg = indicatedPitchDeg;
+    public void setEnginePump1(Double enginePump1) {
+        this.enginePump1 = enginePump1;
     }
 
-    public Double getIndicatedRollDeg() {
-        return indicatedRollDeg;
+    public Double getElectricPump0() {
+        return electricPump0;
     }
 
-    public void setIndicatedRollDeg(Double indicatedRollDeg) {
-        this.indicatedRollDeg = indicatedRollDeg;
+    public void setElectricPump0(Double electricPump0) {
+        this.electricPump0 = electricPump0;
     }
 
-    public Double getInternalPitchDeg() {
-        return internalPitchDeg;
+    public Double getElectricPump1() {
+        return electricPump1;
     }
 
-    public void setInternalPitchDeg(Double internalPitchDeg) {
-        this.internalPitchDeg = internalPitchDeg;
+    public void setElectricPump1(Double electricPump1) {
+        this.electricPump1 = electricPump1;
     }
 
-    public Double getInternalRollDeg() {
-        return internalRollDeg;
+    public Double getExternalPower() {
+        return externalPower;
     }
 
-    public void setInternalRollDeg(Double internalRollDeg) {
-        this.internalRollDeg = internalRollDeg;
+    public void setExternalPower(Double externalPower) {
+        this.externalPower = externalPower;
+    }
+
+    public Double getApuGenerator() {
+        return apuGenerator;
+    }
+
+    public void setApuGenerator(Double apuGenerator) {
+        this.apuGenerator = apuGenerator;
+    }
+
+    public Double getLatitudeDeg() {
+        return latitudeDeg;
+    }
+
+    public void setLatitudeDeg(Double latitudeDeg) {
+        this.latitudeDeg = latitudeDeg;
+    }
+
+    public Double getLongitudeDeg() {
+        return longitudeDeg;
+    }
+
+    public void setLongitudeDeg(Double longitudeDeg) {
+        this.longitudeDeg = longitudeDeg;
+    }
+
+    public Double getAltitudeFt() {
+        return altitudeFt;
+    }
+
+    public void setAltitudeFt(Double altitudeFt) {
+        this.altitudeFt = altitudeFt;
+    }
+
+    public Double getRollDeg() {
+        return rollDeg;
+    }
+
+    public void setRollDeg(Double rollDeg) {
+        this.rollDeg = rollDeg;
+    }
+
+    public Double getPitchDeg() {
+        return pitchDeg;
+    }
+
+    public void setPitchDeg(Double pitchDeg) {
+        this.pitchDeg = pitchDeg;
+    }
+
+    public Double getHeadingDeg() {
+        return headingDeg;
+    }
+
+    public void setHeadingDeg(Double headingDeg) {
+        this.headingDeg = headingDeg;
+    }
+
+    public Double getSideSlipDeg() {
+        return sideSlipDeg;
+    }
+
+    public void setSideSlipDeg(Double sideSlipDeg) {
+        this.sideSlipDeg = sideSlipDeg;
+    }
+
+    public Double getAirspeedKt() {
+        return airspeedKt;
+    }
+
+    public void setAirspeedKt(Double airspeedKt) {
+        this.airspeedKt = airspeedKt;
+    }
+
+    public Double getGlideslope() {
+        return glideslope;
+    }
+
+    public void setGlideslope(Double glideslope) {
+        this.glideslope = glideslope;
+    }
+
+    public Double getVerticalSpeedFps() {
+        return verticalSpeedFps;
+    }
+
+    public void setVerticalSpeedFps(Double verticalSpeedFps) {
+        this.verticalSpeedFps = verticalSpeedFps;
+    }
+
+    public Double getAirspeedIndicatorIndicatedSpeedKt() {
+        return airspeedIndicatorIndicatedSpeedKt;
+    }
+
+    public void setAirspeedIndicatorIndicatedSpeedKt(Double airspeedIndicatorIndicatedSpeedKt) {
+        this.airspeedIndicatorIndicatedSpeedKt = airspeedIndicatorIndicatedSpeedKt;
+    }
+
+    public Double getAltimeterIndicatedAltitudeFt() {
+        return altimeterIndicatedAltitudeFt;
+    }
+
+    public void setAltimeterIndicatedAltitudeFt(Double altimeterIndicatedAltitudeFt) {
+        this.altimeterIndicatedAltitudeFt = altimeterIndicatedAltitudeFt;
+    }
+
+    public Double getAltimeterPressureAltFt() {
+        return altimeterPressureAltFt;
+    }
+
+    public void setAltimeterPressureAltFt(Double altimeterPressureAltFt) {
+        this.altimeterPressureAltFt = altimeterPressureAltFt;
+    }
+
+    public Double getAttitudeIndicatorIndicatedPitchDeg() {
+        return attitudeIndicatorIndicatedPitchDeg;
+    }
+
+    public void setAttitudeIndicatorIndicatedPitchDeg(Double attitudeIndicatorIndicatedPitchDeg) {
+        this.attitudeIndicatorIndicatedPitchDeg = attitudeIndicatorIndicatedPitchDeg;
+    }
+
+    public Double getAttitudeIndicatorIndicatedRollDeg() {
+        return attitudeIndicatorIndicatedRollDeg;
+    }
+
+    public void setAttitudeIndicatorIndicatedRollDeg(Double attitudeIndicatorIndicatedRollDeg) {
+        this.attitudeIndicatorIndicatedRollDeg = attitudeIndicatorIndicatedRollDeg;
+    }
+
+    public Double getAttitudeIndicatorInternalPitchDeg() {
+        return attitudeIndicatorInternalPitchDeg;
+    }
+
+    public void setAttitudeIndicatorInternalPitchDeg(Double attitudeIndicatorInternalPitchDeg) {
+        this.attitudeIndicatorInternalPitchDeg = attitudeIndicatorInternalPitchDeg;
+    }
+
+    public Double getAttitudeIndicatorInternalRollDeg() {
+        return attitudeIndicatorInternalRollDeg;
+    }
+
+    public void setAttitudeIndicatorInternalRollDeg(Double attitudeIndicatorInternalRollDeg) {
+        this.attitudeIndicatorInternalRollDeg = attitudeIndicatorInternalRollDeg;
     }
 
     public Double getEncoderIndicatedAltitudeFt() {
@@ -274,20 +440,20 @@ public class Flightsdatum {
         this.gpsIndicatedAltitudeFt = gpsIndicatedAltitudeFt;
     }
 
-    public Double getIndicatedGroundSpeedKt() {
-        return indicatedGroundSpeedKt;
+    public Double getGpsIndicatedGroundSpeedKt() {
+        return gpsIndicatedGroundSpeedKt;
     }
 
-    public void setIndicatedGroundSpeedKt(Double indicatedGroundSpeedKt) {
-        this.indicatedGroundSpeedKt = indicatedGroundSpeedKt;
+    public void setGpsIndicatedGroundSpeedKt(Double gpsIndicatedGroundSpeedKt) {
+        this.gpsIndicatedGroundSpeedKt = gpsIndicatedGroundSpeedKt;
     }
 
-    public Double getIndicatedVerticalSpeed() {
-        return indicatedVerticalSpeed;
+    public Double getGpsIndicatedVerticalSpeed() {
+        return gpsIndicatedVerticalSpeed;
     }
 
-    public void setIndicatedVerticalSpeed(Double indicatedVerticalSpeed) {
-        this.indicatedVerticalSpeed = indicatedVerticalSpeed;
+    public void setGpsIndicatedVerticalSpeed(Double gpsIndicatedVerticalSpeed) {
+        this.gpsIndicatedVerticalSpeed = gpsIndicatedVerticalSpeed;
     }
 
     public Double getIndicatedHeadingDeg() {
@@ -298,44 +464,44 @@ public class Flightsdatum {
         this.indicatedHeadingDeg = indicatedHeadingDeg;
     }
 
-    public Double getCompassIndicatedHeadingDeg() {
-        return compassIndicatedHeadingDeg;
+    public Double getMagneticCompassIndicatedHeadingDeg() {
+        return magneticCompassIndicatedHeadingDeg;
     }
 
-    public void setCompassIndicatedHeadingDeg(Double compassIndicatedHeadingDeg) {
-        this.compassIndicatedHeadingDeg = compassIndicatedHeadingDeg;
+    public void setMagneticCompassIndicatedHeadingDeg(Double magneticCompassIndicatedHeadingDeg) {
+        this.magneticCompassIndicatedHeadingDeg = magneticCompassIndicatedHeadingDeg;
     }
 
-    public Double getIndicatedSlipSkid() {
-        return indicatedSlipSkid;
+    public Double getSlipSkidBallIndicatedSlipSkid() {
+        return slipSkidBallIndicatedSlipSkid;
     }
 
-    public void setIndicatedSlipSkid(Double indicatedSlipSkid) {
-        this.indicatedSlipSkid = indicatedSlipSkid;
+    public void setSlipSkidBallIndicatedSlipSkid(Double slipSkidBallIndicatedSlipSkid) {
+        this.slipSkidBallIndicatedSlipSkid = slipSkidBallIndicatedSlipSkid;
     }
 
-    public Double getIndicatedTurnRate() {
-        return indicatedTurnRate;
+    public Double getTurnIndicatorIndicatedTurnRate() {
+        return turnIndicatorIndicatedTurnRate;
     }
 
-    public void setIndicatedTurnRate(Double indicatedTurnRate) {
-        this.indicatedTurnRate = indicatedTurnRate;
+    public void setTurnIndicatorIndicatedTurnRate(Double turnIndicatorIndicatedTurnRate) {
+        this.turnIndicatorIndicatedTurnRate = turnIndicatorIndicatedTurnRate;
     }
 
-    public Double getIndicatedSpeedFpm() {
-        return indicatedSpeedFpm;
+    public Double getVerticalSpeedIndicatorIndicatedSpeedFpm() {
+        return verticalSpeedIndicatorIndicatedSpeedFpm;
     }
 
-    public void setIndicatedSpeedFpm(Double indicatedSpeedFpm) {
-        this.indicatedSpeedFpm = indicatedSpeedFpm;
+    public void setVerticalSpeedIndicatorIndicatedSpeedFpm(Double verticalSpeedIndicatorIndicatedSpeedFpm) {
+        this.verticalSpeedIndicatorIndicatedSpeedFpm = verticalSpeedIndicatorIndicatedSpeedFpm;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
+    public Double getEngineRpm() {
+        return engineRpm;
     }
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
+    public void setEngineRpm(Double engineRpm) {
+        this.engineRpm = engineRpm;
     }
 
 }
