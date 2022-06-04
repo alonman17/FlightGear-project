@@ -12,12 +12,11 @@ import java.net.SocketException;
 import java.util.concurrent.*;
 
 public class AgentServer {
-    ServerSocket theServer;
-    ExecutorService pool;
+    private ServerSocket theServer;
+    private ExecutorService pool;
     static volatile boolean stop;
-    Logger logger= LoggerFactory.getLogger(this.getClass());
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
     public AgentServer() {
-        BlockingQueue blockingQueue=new ArrayBlockingQueue(10);
         pool=Executors.newFixedThreadPool(10);
     }
     private void startServer(int port)  {

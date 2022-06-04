@@ -18,4 +18,8 @@ public class AircraftService {
     public List<Aircraft> getAll() {
         return repository.findAll();
     }
+
+    public Aircraft getAircraft(long id) {
+        return repository.findById(id).get();
+    }
 }

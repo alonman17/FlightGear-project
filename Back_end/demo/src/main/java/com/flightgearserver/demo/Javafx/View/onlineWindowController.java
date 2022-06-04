@@ -1,12 +1,11 @@
 package com.flightgearserver.demo.Javafx.View;
 
-import com.flightgearserver.demo.Javafx.Model.Model;
+import com.flightgearserver.demo.Javafx.Model.onlineModel;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -16,7 +15,6 @@ import java.util.*;
 public class onlineWindowController extends Observable  {
 
     int size=10;
-    Model model;
     Map<String,Circle> planeStatuses;
     Map<String,Button> buttonMap;
     List<Label> labels;

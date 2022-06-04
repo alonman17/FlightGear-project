@@ -22,7 +22,7 @@ public class TimeSerisTests {
     @Test
     public void testInsertFlightData(){
         TimeSeries ts= new TimeSeries("C:\\Users\\alonm\\Desktop\\FlightGear-project\\Back_end\\demo\\src\\main\\resources\\normal_flight.csv");
-        service.insertTimeSeries(ts,1);
+        //service.insertTimeSeries(ts,1);
 
     }
 

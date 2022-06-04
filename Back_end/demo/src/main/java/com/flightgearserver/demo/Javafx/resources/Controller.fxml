@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.flightgearserver.demo.Javafx.View.onlineWindowController">
   <tabs>
@@ -23,10 +24,16 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Untitled Tab 2">
+    <Tab text="Server status">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                 </AnchorPane>
+               <children>
+                  <Button layoutX="421.0" layoutY="80.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="start" />
+                  <Label layoutX="14.0" layoutY="85.0" text="Agent server port" />
+                  <TextField layoutX="117.0" layoutY="81.0" text="5500" />
+                  <Label layoutX="286.0" layoutY="85.0" text="Stauts:" />
+                  <Circle fill="#ff0011" layoutX="342.0" layoutY="94.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+               </children></AnchorPane>
       </content>
     </Tab>
   </tabs>

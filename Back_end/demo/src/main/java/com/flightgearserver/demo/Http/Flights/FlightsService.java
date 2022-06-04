@@ -14,6 +14,7 @@ import java.util.List;
 public class FlightsService {
     FlightsRepository flightsRepository;
     FlightdataRepository flightdataRepository;
+
     @Autowired
     public FlightsService(FlightsRepository flightsRepository, FlightdataRepository flightdataRepository) {
         this.flightsRepository = flightsRepository;

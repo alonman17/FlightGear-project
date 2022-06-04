@@ -1,11 +1,7 @@
 package com.flightgearserver.demo.agent;
 
-import com.flightgearserver.demo.Http.Aircraft.AircraftService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -27,7 +23,8 @@ public class AgentManager {
     private int[] aircraftIds;
     int size=10;
 
-    Logger logger= LoggerFactory.getLogger(AgentManager.class);
+    Logger logger= LoggerFactory.getLogger("agentManager");
+    //Helper property to make this observable
     private PropertyChangeSupport support;
 
     private AgentManager() {
@@ -59,7 +56,6 @@ public class AgentManager {
                 }
                 support.firePropertyChange(String.valueOf(x),0,1);
                 aircraftIds[x]=1;
-            System.out.println(x);
                 return x;
             }
         return -1;
@@ -72,11 +68,27 @@ public class AgentManager {
     }
 
     public void removeAgent(int id) {
-        clients.get(id).close();
-        clients.remove(id);
-        logger.info("Aircraft " + id + " disconnected");
-        aircraftIds[id]=0;
-        support.firePropertyChange(String.valueOf(id),1,0);
+        if(clients.containsKey(id)){
+            var client=clients.get(id);
+            clients.remove(id);
+            client.close();
+            logger.info("Aircraft " + id + " just went offline");
+            aircraftIds[id]=0;
+            support.firePropertyChange(String.valueOf(id),1,0);
+        }
+    }
 
+    public String[] getAllLiveFlightsValues() {
+        String[] values=new String[clients.size()];
+        int i=0;
+        for (var client:clients.values()) {
+            values[i]=client.getFlightLiveValues().toString();
+            i++;
+        }
+        return values;
+    }
+
+    public int getCountOfAgents() {
+        return clients.size();
     }
 }

@@ -47,6 +47,7 @@ public class AgentHandler {
         id=AgentManager.getInstance().addAgent(this);
         this.in = new Scanner(new BufferedInputStream(in));
         this.out=new PrintWriter(out,true);
+        ts=new TimeSeries("src/main/resources/symbol.txt");
     }
 
     /**
@@ -63,23 +64,24 @@ public class AgentHandler {
                 while (!stop&&in.hasNext()){
                     StringBuilder stringBuilder=new StringBuilder();
                     String line=in.nextLine();
+
+                    ts.addRow(line);
                     //Assuming our lines comes out as valName:value,valName1:value1....
-                    String[] values=line.split(",");
-                    for (int i = 0; i < values.length; i++)
-                    {
-                        String[] temp=values[i].split(":");
-                        flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
-                        stringBuilder.append(temp[1]+",");
-                    }
-                    stringBuilder.deleteCharAt(stringBuilder.length());
-                    ts.addRow(stringBuilder.toString());
+//                    String[] values=line.split(",");
+//                    for (int i = 0; i < values.length; i++)
+//                    {
+//                        String[] temp=values[i].split(":");
+//                        flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
+//                        stringBuilder.append(temp[1]+",");
+//                    }
+//                    stringBuilder.deleteCharAt(stringBuilder.length());
+//                    ts.addRow(stringBuilder.toString());
+                    logger.info("Received data from agent: "+ line);
                 }
+                close();
             }).run();
-
-
-
+            ts.exportToCsv("test.csv");
     }
-
     public void writeToClient(String line){
         logger.info("Writing to agent : "+ line);
         out.println(line);
@@ -93,6 +95,7 @@ public class AgentHandler {
         stop=true;
         in.close();
         out.close();
+        AgentManager.getInstance().removeAgent(id);
     }
 
 }

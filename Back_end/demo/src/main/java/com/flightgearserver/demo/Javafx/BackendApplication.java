@@ -3,7 +3,7 @@ package com.flightgearserver.demo.Javafx;
 import com.flightgearserver.demo.DemoApplication;
 import com.flightgearserver.demo.Javafx.Controllers.onlineController;
 import com.flightgearserver.demo.Javafx.View.onlineWindowController;
-import com.flightgearserver.demo.Javafx.Model.Model;
+import com.flightgearserver.demo.Javafx.Model.onlineModel;
 import com.flightgearserver.demo.agent.AgentManager;
 import com.flightgearserver.demo.agent.AgentServer;
 import javafx.application.Application;
@@ -32,20 +32,18 @@ public class BackendApplication extends Application {
         AgentServer agentServer=new AgentServer();
         agentServer.start(5500);
     }
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Path.of("C:\\Users\\alonm\\Desktop\\FlightGear-project\\Back_end\\demo\\src\\main\\java\\com\\flightgearserver\\demo\\Javafx\\resources\\Controller.fxml").toUri().toURL());
         Parent root = (Parent) fxmlLoader.load();
         onlineWindowController wc=fxmlLoader.getController();
-        Model m=new Model();
+        onlineModel m=new onlineModel();
         onlineController controller=new onlineController(wc,m);
         AgentManager.getInstance().addPropertyChangeListener(m);
-        Scene scene = new Scene(root,400,600);
+        Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.show();
     }
-
     @Override
     public void stop() {
         //this.applicationContext.close();

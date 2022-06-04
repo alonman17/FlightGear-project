@@ -11,17 +11,37 @@ public class TimeSeries {
 
 	List<String> colName;
 	ArrayList<ArrayList<Float>> data ;
-	public TimeSeries(String colNames) {
+//	public TimeSeries(String colNames) {
+//		colName = new ArrayList<>();
+//		data = new ArrayList<>();
+//		String[] curRow = colNames.split(",");
+//		for (int i = 0; i < curRow.length; i++) {
+//			colName.add(curRow[i]);
+//		}
+//		//initializing each column in the data
+//			for (int i = 0; i < curRow.length; i++) {
+//				data.add(new ArrayList<Float>());
+//			}
+//	}
+	public TimeSeries(String FilePath){
 		colName = new ArrayList<>();
 		data = new ArrayList<>();
-		String[] curRow = colNames.split(",");
-		for (int i = 0; i < curRow.length; i++) {
-			colName.add(curRow[i]);
+		try{
+			 BufferedReader bufferedReader = new BufferedReader(new FileReader(FilePath));
+			 String line = bufferedReader.readLine();
+			 while(line!=null){
+				 colName.add(line);
+				 line = bufferedReader.readLine();
+			 }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		//initializing each column in the data
-			for (int i = 0; i < curRow.length; i++) {
-				data.add(new ArrayList<Float>());
-			}
+		for (int i = 0; i < colName.size(); i++) {
+			data.add(new ArrayList<Float>());
+		}
 	}
 	//TODO do we need csvfile constructor?
 //	public TimeSeries(String csvFileName) {
@@ -68,7 +88,7 @@ public class TimeSeries {
 	public void addRow(String row){
 		String[] curRow = row.split(",");
 		//TODO CHANGE BACK TO curRow.length!
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < curRow.length; i++) {
 			data.get(i).add(Float.parseFloat(curRow[i]));
 		}
 	}

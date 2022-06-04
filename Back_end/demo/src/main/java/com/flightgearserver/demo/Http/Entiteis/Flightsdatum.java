@@ -1,12 +1,10 @@
 package com.flightgearserver.demo.Http.Entiteis;
 
-import com.flightgearserver.demo.Http.Entiteis.Flight;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "flightdata")
-public class Flightdatum {
+public class Flightsdatum {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
@@ -503,5 +501,6 @@ public class Flightdatum {
     public void setEngineRpm(Double engineRpm) {
         this.engineRpm = engineRpm;
     }
+
 
 }
