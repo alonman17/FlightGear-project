@@ -8,9 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-
-
 public class Cli implements Icli {
     Model m;
 
@@ -37,7 +34,7 @@ public class Cli implements Icli {
 
     public Cli() {
         this.mainMenu = menuBuilder();
-        this.m = new Model("properties.txt");
+        this.m = new Model();
     }
 
     public void start() {
@@ -90,7 +87,6 @@ public class Cli implements Icli {
         setRudder(0);
         setElevator(0);
         setThruttle("0");
-        ClientHandler.stop =true;
         AgentServer.stop = true;
     }
 
@@ -108,25 +104,25 @@ public class Cli implements Icli {
 
     @Override
     public void setAileron(float n) {
-        m.setAileron(n);
+        m.client.setAileron(n);
         System.out.println("Aliron changed to: " + n + " degres\n");
     }
 
     @Override
     public void setRudder(float n) {
-        m.setRudder(n);
+        m.client.setRudder(n);
         System.out.println("Rudder changed to: " + n + " degres\n");
     }
 
     @Override
     public void setElevator(float n) {
-        m.setElevators(n);
+        m.client.setElevators(n);
         System.out.println("Elevator changed to: " + n + " degres\n");
     }
 
     @Override
     public void setThruttle(String n) {
-        m.setThruttle(n);
+        m.client.setThruttle(n);
         System.out.println("Thurttle is at : " + n + " Percent \n");
 
     }
