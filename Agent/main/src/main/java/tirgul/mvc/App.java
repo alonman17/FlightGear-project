@@ -6,11 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import tirgul.Controller.AgentController;
 import tirgul.model.AgentServer;
 import tirgul.model.FgClientHandler;
 import tirgul.model.Model;
 import tirgul.view.Cli;
+import tirgul.view.ViewServer;
+import tirgul.Controller.Controller;
 
 import java.io.IOException;
 
@@ -29,11 +30,13 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         PrimaryController pc = new PrimaryController();
-        Model model = new Model();
-        AgentController controller = new AgentController();
 
-        controller.connectToDB("127.0.0.1", 5500);
-        new Thread(() -> controller.streamDataFromFG(FgClientHandler.theClient)).start();
+        Model model = new Model();
+
+        ViewServer backendServer = new ViewServer(5500);
+        new Thread(() -> backendServer.startServer()).start();
+
+        Controller controller = new Controller();
 
     }
 

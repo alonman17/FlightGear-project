@@ -12,9 +12,9 @@ public class AgentServer {
     int port;
     FgClientHandler fgClient;
     ServerSocket agentServer;
-    Socket client;
+    public static Socket client;
 
-    public boolean connected;
+    static public boolean connected;
     static public volatile boolean stop = false;
 
     public AgentServer() {
@@ -33,6 +33,7 @@ public class AgentServer {
         }
 
         try {
+
             while (!stop) {
 
                 client = agentServer.accept();
@@ -41,12 +42,13 @@ public class AgentServer {
                 connected = true;
                 try {
                     fgClient.handleClient(new InputStreamReader(client.getInputStream()),
-                            new OutputStreamWriter(client.getOutputStream()), client);
+                            new OutputStreamWriter(client.getOutputStream()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
             }
+
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {

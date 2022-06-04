@@ -11,25 +11,23 @@ import java.io.InputStreamReader;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.Socket;
+
 import java.util.Scanner;
 
 public class FgClientHandler implements ClientHandler {
 
     private PrintWriter outToClient;
     private Scanner inFromClient;
-    public static Socket theClient;
 
     @Override
-    public void handleClient(InputStreamReader in, OutputStreamWriter out, Socket clientSocket) {
-        theClient = clientSocket;
+    public void handleClient(InputStreamReader in, OutputStreamWriter out) {
         this.inFromClient = new Scanner(in);
         this.outToClient = new PrintWriter(out);
-        new Thread(() -> writeToCsv(inFromClient, outToClient)).start();
+        // new Thread(() -> writeToCsv(inFromClient, outToClient)).start();
 
     }
 
-    public void writeToCsv(Scanner in, PrintWriter out) {
+    public void writeToCsv(Scanner in, PrintWriter out, String fileName) {
 
         System.out.println("Writing to CSV file ...");
 
@@ -42,11 +40,12 @@ public class FgClientHandler implements ClientHandler {
             while ((line = bf.readLine()) != null) {
                 sb.append(line.toUpperCase() + ",");
             }
+            sb.append("\n");
 
             bf.close();
             line = null;
 
-            FileWriter tempFile = new FileWriter("FG_Data.txt");
+            FileWriter tempFile = new FileWriter(new File(fileName));
             tempFile.write(sb.toString());
             while (in.hasNext()) {
                 line = in.nextLine();

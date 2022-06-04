@@ -20,6 +20,7 @@ public class AgentController {
     public AgentController() {
         pilot = new Pilot();
         fgClient = new FgClientHandler();
+        dataHandler = new DataHandler();
     }
 
     public void connectToDB(String ip, int port) {
@@ -33,13 +34,14 @@ public class AgentController {
     }
 
     public void streamDataFromFG(Socket fgDataSocket) {
+
         try {
 
             PrintWriter out2back = new PrintWriter(new OutputStreamWriter(backeEndSocket.getOutputStream()));
             Scanner inFromFg = new Scanner(new InputStreamReader(fgDataSocket.getInputStream()));
 
             while (inFromFg.hasNext()) {
-                out2back.println(inFromFg.nextLine());
+                out2back.println(dataHandler.ParsData(inFromFg.nextLine()));
             }
             out2back.close();
             inFromFg.close();

@@ -18,6 +18,7 @@ public class Client {
 
     public Client() {
         properties = new HashMap<>();
+        while (!AgentServer.connected);
         try {
             client = new Socket("127.0.0.1", 5402);
             out2fg = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
