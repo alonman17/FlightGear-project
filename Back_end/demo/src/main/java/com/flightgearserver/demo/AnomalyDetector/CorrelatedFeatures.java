@@ -1,4 +1,4 @@
-package test;
+package com.flightgearserver.demo.AnomalyDetector;
 
 public class CorrelatedFeatures {
 	public final String feature1,feature2;

@@ -8,7 +8,7 @@ import java.util.List;
 
 
 
-public class SimpleAnomalyDetector implements TimeSeriesAnomalyDetector {
+public class LinearAnomalyDetector implements TimeSeriesAnomalyDetector {
     List<CorrelatedFeatures> coRelatedFeat = new ArrayList<>();
     float highPearsonVal=0.9F;
     public void setHighPearsonVal(float highPearsonVal) {

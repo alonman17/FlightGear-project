@@ -1,5 +1,5 @@
-package test;
-import java.lang.Math;
+package com.flightgearserver.demo.AnomalyDetector;
+
 public class StatLib {
     // simple average
     public static float avg(float[] x)

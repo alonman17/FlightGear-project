@@ -1,4 +1,4 @@
-package test;
+package com.flightgearserver.demo.AnomalyDetector;
 
 public class AnomalyReport {
 	public final String description;

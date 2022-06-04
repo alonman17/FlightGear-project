@@ -1,4 +1,4 @@
-package test;
+package com.flightgearserver.demo.AnomalyDetector;
 
 public class Line {
     public final float a,b;

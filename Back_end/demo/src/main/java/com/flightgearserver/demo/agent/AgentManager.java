@@ -1,5 +1,6 @@
 package com.flightgearserver.demo.agent;
 
+import com.flightgearserver.demo.AnomalyDetector.TimeSeriesAnomalyDetector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class AgentManager {
 //    private AircraftService service;
     private int[] aircraftIds;
     int size=10;
-
+    private TimeSeriesAnomalyDetector detector;
     Logger logger= LoggerFactory.getLogger("agentManager");
     //Helper property to make this observable
     private PropertyChangeSupport support;
