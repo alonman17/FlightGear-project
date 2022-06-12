@@ -33,8 +33,8 @@ public class App extends Application {
 
         Model model = new Model();
 
-        ViewServer backendServer = new ViewServer(5500);
-        new Thread(() -> backendServer.startServer()).start();
+        //ViewServer backendServer = new ViewServer(5500);
+        //new Thread(() -> backendServer.startServer()).start();
 
         Controller controller = new Controller();
 

@@ -29,7 +29,7 @@ public class Client {
         }
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File("properties.txt")));
+            BufferedReader br = new BufferedReader(new FileReader(new File("src/main/resources/properties.txt")));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] sp = line.split(",");
