@@ -2,8 +2,8 @@ import React ,{ useMemo, useRef, useState } from 'react';
 import { Joystick } from 'react-joystick-component';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import zIndex from '@mui/material/styles/zIndex';
-
+import Tilt from 'react-parallax-tilt';
+import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 function GobeJoystickController({
     move,
     start,
@@ -34,16 +34,15 @@ function GobeJoystickController({
     return (
       <div ref={setContainerDiv} style={containerStyle} className={className}>
         {containerDiv ? (
-          <Joystick
-            // we are assuming that the container dimensions will never change in the lifetime of this component
-            size={Math.min(containerDiv.offsetWidth, containerDiv.offsetHeight)}
-            baseColor={baseColor}
-            stickColor={stickColor}
-            throttle={200}
-            move={move}
-            stop={stop}
-            start={start}
-          />
+          <><Joystick
+                    // we are assuming that the container dimensions will never change in the lifetime of this component
+                    size={Math.min(containerDiv.offsetWidth, containerDiv.offsetHeight)}
+                    baseColor={baseColor}
+                    stickColor={stickColor}
+                    throttle={200}
+                    move={move}
+                    stop={stop}
+                    start={start} /></>
         ) : null}
       </div>
     );
@@ -58,7 +57,11 @@ function GobeJoystickController({
 
 
 export default function JoystickComp(){
+    const [[manualTiltAngleX, manualTiltAngleY], setManualTiltAngle] = useState([0, 0]);
+
     const handleMove = (e) => {
+        setManualTiltAngle([e.y, e.x]);
+
         let x = e.x/50
         let y = e.y/50
         if(e.direction==="BACKWARD" ||e.direction==="FORWARD"){
@@ -68,18 +71,18 @@ export default function JoystickComp(){
         }
       };
       const handleStop = (e) => {
+        setManualTiltAngle([0, 0]);
+
         console.log("STOP");
       };
       const handleStart = (e) => {
         console.log("START");
       };
-    
-// return(<Joystick start={action("Started")} controlPlaneShape={JoystickShape.Square} move={action("Moved")}
-// stop={action("Stopped")}/>)
+     
 return(
     <Box sx={{
         minWidth : 400,
-        minHeight: 250,
+        minHeight: 300,
         backgroundColor: '#e5d5d3',
         opacity:0.9,
         '&:hover': {
@@ -99,7 +102,17 @@ return(
                 max={1}
                 onChange={(e)=>console.log(e.target.value)}
                 />
-        <div style={{position:'absolute' , left:'40%',bottom:'40%'}}>
+    
+        <Tilt tiltAngleXManual={manualTiltAngleX} tiltAngleYManual={manualTiltAngleY} glareEnable={true}>
+                    <div className="aircraftBackground">
+                        <AirplanemodeActiveIcon style={{width: '40%', height: '40%'}} />
+                      
+                    </div>
+                </Tilt>
+                <div style={{position:'absolute' , left:'20%',bottom:'30%'}}>
+                <div className='degree'>x: {manualTiltAngleX?.toFixed(0)}°</div>
+                <div className='degree'>y: {manualTiltAngleY?.toFixed(0)}°</div>
+                <br />
             <GobeJoystickController
             opactiy={1}
             move={handleMove}

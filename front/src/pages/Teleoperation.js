@@ -2,6 +2,7 @@ import Sidebar from "../components/nav-bar/nav_bar"
 import JoystickComp from "../components/joystick"
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import { Button } from "@mui/material";
 export default function Teleoperation (){
     return (<div >
         <Sidebar />
@@ -18,6 +19,7 @@ export default function Teleoperation (){
             <Form.Text id="inputText" >
                 Your Code must be compatible with the language of Simulator. 
             </Form.Text>
+            <Button style={{position:'relative' , left:'8vw'}} size="large" color="secondary">submit</Button>
         </div>
         <div  style={{position:'absolute' , left:'45%',top:'37%' }}>
             <JoystickComp />

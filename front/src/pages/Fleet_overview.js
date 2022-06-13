@@ -1,7 +1,8 @@
 import Sidebar from "../components/nav-bar/nav_bar"
 import Map from "../components/map"
 import KPI from "../components/kpi"
-
+import Avatar from '@mui/material/Avatar';
+import Play from '../assets/play.jpg'
 export default function FleetOverview (){
     return (<div >
     <Sidebar />
@@ -13,6 +14,8 @@ export default function FleetOverview (){
     <div style={{position:'absolute' , right:'0%',top:'17%' ,width:'40vw'}}>
         <h2 style={{position:'relative' , right:'-10vw',top:'-7vh',fontSize:'2.2rem' }}>KPI</h2>
         <KPI />
+        <Avatar alt="Remy Sharp" src={Play} />
+        <img alt="assets" src='front/src/assets/play.jpg' />
     </div>
 </div>)
 }
