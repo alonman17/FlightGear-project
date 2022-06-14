@@ -1,6 +1,6 @@
-package flightgearserver.Http.Flights;
+package com.flightgearserver.Http.Flights;
 
-import flightgearserver.Http.Entiteis.Flight;
+import com.flightgearserver.Http.Entiteis.Flight;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

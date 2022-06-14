@@ -1,6 +1,8 @@
-package flightgearserver.Http.statistics;
+package com.flightgearserver.Http.statistics;
 
-import main.java.com.flightgearserver.Http.Flights.FlightsService;
+
+import com.flightgearserver.Http.Aircraft.AircraftService;
+import com.flightgearserver.Http.Flights.FlightsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,11 @@ public class StatisticsService {
 
 
     FlightsService flightsService;
-
+    AircraftService aircraftService;
     @Autowired
-    public StatisticsService(FlightsService flightsService) {
+    public StatisticsService(FlightsService flightsService, AircraftService aircraftService) {
         this.flightsService = flightsService;
+        this.aircraftService = aircraftService;
     }
 
     public List<Map<String, Double>> getMillagePerMonthAll(int month){
@@ -27,5 +30,11 @@ public class StatisticsService {
     }
     public int getLiveFlightsCount(){
         return Statistics.getLiveFlightsCount();
+    }
+    public Map<Integer, Double> AllMonthsAllAircrafts(int year){
+        return Statistics.AllMonthsAllAircrafts(flightsService.getAllFlights(),year);
+    }
+    public Map<Integer,Integer> getFleetSizePerMonth(int year){
+        return Statistics.AccumulatingAircraftsPerMonth(aircraftService.getAll(),year);
     }
 }

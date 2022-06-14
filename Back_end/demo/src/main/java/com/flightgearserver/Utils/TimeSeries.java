@@ -1,4 +1,4 @@
-package flightgearserver.Utils;
+package com.flightgearserver.Utils;
 
 
 

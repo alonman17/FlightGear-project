@@ -1,4 +1,4 @@
-package flightgearserver.liveCache;
+package com.flightgearserver.liveCache;
 
 import java.util.HashMap;
 import java.util.Map;

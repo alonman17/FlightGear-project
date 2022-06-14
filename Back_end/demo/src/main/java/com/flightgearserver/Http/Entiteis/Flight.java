@@ -1,4 +1,4 @@
-package flightgearserver.Http.Entiteis;
+package com.flightgearserver.Http.Entiteis;
 
 import org.hibernate.annotations.Type;
 

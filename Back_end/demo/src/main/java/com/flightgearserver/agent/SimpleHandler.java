@@ -1,7 +1,7 @@
-package flightgearserver.agent;
+package com.flightgearserver.agent;
 
-import flightgearserver.ServerScoket.ClientHandler;
-import flightgearserver.Utils.TimeSeries;
+import com.flightgearserver.ServerScoket.ClientHandler;
+import com.flightgearserver.Utils.TimeSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

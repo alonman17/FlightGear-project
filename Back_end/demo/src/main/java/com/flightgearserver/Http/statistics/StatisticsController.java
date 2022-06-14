@@ -1,4 +1,4 @@
-package flightgearserver.Http.statistics;
+package com.flightgearserver.Http.statistics;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,17 @@ public class StatisticsController {
         return service.getMillagePerMonthAll(month);
     }
 
-    @GetMapping(value = "api/statistics/liveFlights")
+    @GetMapping("api/statistics/liveFlightsCount")
     public Integer getLiveFlightsCount(){
         return service.getLiveFlightsCount();
+    }
+
+    @GetMapping("api/statistics/aircraft/{year}")
+    public Map<Integer, Double> getMillageAllAircraftsPerYear(@PathVariable("year") int year){
+        return service.AllMonthsAllAircrafts(year);
+    }
+    @GetMapping("api/statistics/fleetSize/{year}")
+    public Map<Integer,Integer> getFleetSizePerMonth(@PathVariable("year") int year){
+        return service.getFleetSizePerMonth(year);
     }
 }

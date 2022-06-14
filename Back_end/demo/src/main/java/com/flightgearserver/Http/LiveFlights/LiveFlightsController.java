@@ -1,9 +1,8 @@
-package flightgearserver.Http.LiveFlights;
+package com.flightgearserver.Http.LiveFlights;
 
+import com.flightgearserver.liveCache.FlightLiveValues;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -25,6 +24,17 @@ public class LiveFlightsController {
     public Double getAgentSpecificValue(@PathVariable("id") int id,@PathVariable("value") String value){
         return service.getAgentSpecificValue(id,value);
     }
-
+    @GetMapping("api/liveFlights/all")
+    public Map<Integer, FlightLiveValues> getAllLiveFlightsValues(){
+        return service.getAllLiveFlightsValues();
+    }
+    @PostMapping("api/liveFlights/{id}")
+    public void sendDataToAgent(@PathVariable("id") int id,@RequestBody Map<String,Double> data){
+        service.sendDataToAgent(id,data);
+    }
+    @PostMapping ("api/liveFlights/intepater/{id}")
+    public void sendDataToInterpeter(@PathVariable("id") int id,@RequestBody String[] data){
+        service.sendDataToInterpeter(id,data);
+    }
 
 }

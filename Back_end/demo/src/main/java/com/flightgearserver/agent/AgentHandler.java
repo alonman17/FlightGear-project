@@ -1,7 +1,7 @@
-package flightgearserver.agent;
+package com.flightgearserver.agent;
 
-import flightgearserver.Utils.TimeSeries;
-import flightgearserver.liveCache.FlightLiveValues;
+import com.flightgearserver.Utils.TimeSeries;
+import com.flightgearserver.liveCache.FlightLiveValues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,20 +67,26 @@ public class AgentHandler {
 
                     //ts.addRow(line);
                     //Assuming our lines comes out as valName:value,valName1:value1....
-                    String[] values=line.split(",");
-                    for (int i = 0; i < values.length; i++)
-                    {
+                    try {
 
-                        String[] temp=values[i].split(":");
-                        flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
-                        stringBuilder.append(temp[1]+",");
+
+                        String[] values = line.split(",");
+                        for (int i = 0; i < values.length; i++) {
+
+                            String[] temp = values[i].split(":");
+                            flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
+                            stringBuilder.append(temp[1] + ",");
+                        }
+
+                        //logger.info(stringBuilder.toString());
+                        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+                        ts.addRow(stringBuilder.toString());
+                        stringBuilder.setLength(0);
+                        //logger.info("Received data from agent: "+ line);
                     }
-
-                    //logger.info(stringBuilder.toString());
-                    stringBuilder.deleteCharAt(stringBuilder.length()-1);
-                    ts.addRow(stringBuilder.toString());
-                    stringBuilder.setLength(0);
-                    //logger.info("Received data from agent: "+ line);
+                    catch (Exception e){
+                        logger.error("Error in reading data from agent");
+                    }
                 }
                 close();
             }).run();

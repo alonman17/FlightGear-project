@@ -1,6 +1,7 @@
-package flightgearserver.Http.LiveFlights;
+package com.flightgearserver.Http.LiveFlights;
 
-import flightgearserver.agent.AgentManager;
+import com.flightgearserver.agent.AgentManager;
+import com.flightgearserver.liveCache.FlightLiveValues;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -29,5 +30,20 @@ public class LiveFlightsService {
     }
 
 
+    public Map<Integer, FlightLiveValues> getAllLiveFlightsValues() {
+        return manager.getAllLiveFlightsValues();
+    }
 
+    public void sendDataToAgent(int id, Map<String, Double> data) {
+        StringBuilder sb=new StringBuilder();
+        for(var x:data.entrySet()){
+            sb.append(x.getKey()+":"+x.getValue()+",");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        manager.getAgent(id).writeToClient(sb.toString());
+    }
+    //TODO: implement this
+    public void sendDataToInterpeter(int id, String[] data) {
+
+    }
 }

@@ -1,11 +1,12 @@
-package flightgearserver.Http.Flights;
+package com.flightgearserver.Http.Flights;
 
 
-import flightgearserver.Http.Entiteis.Flight;
-import flightgearserver.Http.Entiteis.Flightsdatum;
+import com.flightgearserver.Http.Entiteis.Flight;
+import com.flightgearserver.Http.Entiteis.Flightsdatum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,5 +32,8 @@ public class FlightsController {
     public List<Flightsdatum> getFightData(@PathVariable("id") Long id) {
         return service.getFightData(id);
     }
-
+    @GetMapping(value ="api/flights/normalFlight" ,produces = "text/csv")
+    public @ResponseBody byte[] getNormalFlight() {
+        return service.getNormalFlight();
+    }
 }

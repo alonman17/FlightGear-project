@@ -1,6 +1,7 @@
-package flightgearserver.Http.Flightsdata;
+package com.flightgearserver.Http.Flightsdata;
 
-import main.java.com.flightgearserver.Http.Entiteis.Flightsdatum;
+import com.flightgearserver.Http.Entiteis.Flightsdatum;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

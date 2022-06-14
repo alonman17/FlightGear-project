@@ -1,4 +1,4 @@
-package flightgearserver.agent;
+package com.flightgearserver.agent;
 
 
 import org.slf4j.Logger;

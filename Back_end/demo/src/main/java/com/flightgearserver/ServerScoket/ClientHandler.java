@@ -1,4 +1,4 @@
-package flightgearserver.ServerScoket;
+package com.flightgearserver.ServerScoket;
 
 import java.io.IOException;
 import java.io.InputStream;

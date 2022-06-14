@@ -1,6 +1,6 @@
-package flightgearserver.Http.Aircraft;
+package com.flightgearserver.Http.Aircraft;
 
-import flightgearserver.Http.Entiteis.Aircraft;
+import com.flightgearserver.Http.Entiteis.Aircraft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

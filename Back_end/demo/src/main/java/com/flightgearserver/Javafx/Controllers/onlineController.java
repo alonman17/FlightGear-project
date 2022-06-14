@@ -1,17 +1,20 @@
-package flightgearserver.Javafx.Controllers;
+package com.flightgearserver.Javafx.Controllers;
 
-import main.java.com.flightgearserver.Javafx.Model.onlineModel;
-import main.java.com.flightgearserver.Javafx.View.onlineWindowController;
+
+
+
+import com.flightgearserver.Javafx.Model.onlineModel;
+import com.flightgearserver.Javafx.View.onlineWindowController;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class onlineController implements Observer {
 
-    main.java.com.flightgearserver.Javafx.Model.onlineModel onlineModel;
+    onlineModel onlineModel;
     onlineWindowController wc;
 
-    public onlineController(onlineWindowController wc, onlineModel m) {
+    public onlineController(onlineWindowController wc, com.flightgearserver.Javafx.Model.onlineModel m) {
         this.wc = wc;
         this.onlineModel =m;
         m.addObserver(this);

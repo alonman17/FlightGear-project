@@ -1,4 +1,4 @@
-package flightgearserver.Http.Flightsdata;
+package com.flightgearserver.Http.Flightsdata;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

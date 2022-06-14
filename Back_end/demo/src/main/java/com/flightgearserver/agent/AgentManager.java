@@ -1,7 +1,13 @@
-package flightgearserver.agent;
+package com.flightgearserver.agent;
 
+import com.flightgearserver.ApplicationContextUtils;
+import com.flightgearserver.Http.Aircraft.AircraftService;
+import com.flightgearserver.liveCache.FlightLiveValues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Scope;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -13,23 +19,29 @@ import java.util.Random;
 /**
  * Used to manage all the agents.
  */
-
+@Configurable
 public class AgentManager {
     private static AgentManager manager;
     private Map<Integer, AgentHandler> clients;
     //TODO FIX THE SERVICE
-//    @Autowired
-//    private AircraftService service;
+    private AircraftService service;
     private int[] aircraftIds;
-    int size=10;
+    private int numOfAicrafts;
+
+    public int getNumOfAicrafts() {
+        return numOfAicrafts;
+    }
 
     Logger logger= LoggerFactory.getLogger("agentManager");
     //Helper property to make this observable
     private PropertyChangeSupport support;
-
+    @Autowired
     private AgentManager() {
+        this.service= ApplicationContextUtils.getApplicationContext().getBean(AircraftService.class);
+        this.numOfAicrafts=service.getAll().size();
         clients=new HashMap<>();
-        aircraftIds=new int[size];
+        aircraftIds=new int[numOfAicrafts];
+
         support=new PropertyChangeSupport(this);
     }
 
@@ -78,14 +90,12 @@ public class AgentManager {
         }
     }
 
-    public String[] getAllLiveFlightsValues() {
-        String[] values=new String[clients.size()];
-        int i=0;
+    public Map<Integer, FlightLiveValues> getAllLiveFlightsValues() {
+        Map<Integer, FlightLiveValues> liveFlights=new HashMap<>();
         for (var client:clients.values()) {
-            values[i]=client.getFlightLiveValues().toString();
-            i++;
+            liveFlights.put(client.getId(),client.getFlightLiveValues());
         }
-        return values;
+        return liveFlights;
     }
 
     public int getCountOfAgents() {

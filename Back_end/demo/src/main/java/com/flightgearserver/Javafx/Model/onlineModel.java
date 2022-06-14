@@ -1,4 +1,4 @@
-package flightgearserver.Javafx.Model;
+package com.flightgearserver.Javafx.Model;
 
 import com.flightgearserver.agent.AgentManager;
 

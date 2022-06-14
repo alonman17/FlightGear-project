@@ -1,14 +1,19 @@
-package flightgearserver.Http.Flights;
+package com.flightgearserver.Http.Flights;
 
 
-import flightgearserver.Http.Entiteis.Flight;
-import flightgearserver.Http.Entiteis.Flightsdatum;
-import flightgearserver.Http.Flightsdata.FlightdataRepository;
+import com.flightgearserver.Http.Entiteis.Flight;
+import com.flightgearserver.Http.Entiteis.Flightsdatum;
+import com.flightgearserver.Http.Flightsdata.FlightdataRepository;
+import org.apache.commons.io.IOUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -37,5 +42,16 @@ public class FlightsService {
 
     public List<Flightsdatum> getData(){
         return flightdataRepository.findAll();
+    }
+
+    public byte[] getNormalFlight()  {
+
+        try {
+            InputStream in =new FileInputStream("C:\\Users\\alonm\\Desktop\\FlightGear-project\\Back_end\\demo\\src\\main\\resources\\normal_flight.csv");
+            return IOUtils.toByteArray(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

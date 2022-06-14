@@ -1,5 +1,6 @@
-package flightgearserver.Javafx.View;
+package com.flightgearserver.Javafx.View;
 
+import com.flightgearserver.agent.AgentManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ import java.util.*;
 
 public class onlineWindowController extends Observable  {
 
-    int size=10;
+    int size= AgentManager.getInstance().getNumOfAicrafts();
     Map<String,Circle> planeStatuses;
     Map<String,Button> buttonMap;
     List<Label> labels;

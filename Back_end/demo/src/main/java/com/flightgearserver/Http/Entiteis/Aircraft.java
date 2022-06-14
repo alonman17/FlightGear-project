@@ -1,8 +1,9 @@
-package flightgearserver.Http.Entiteis;
+package com.flightgearserver.Http.Entiteis;
 
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(name = "aircrafts")
@@ -19,6 +20,17 @@ public class Aircraft {
 
     @Column(name = "millage")
     private Double millage;
+
+    @Column(name = "dateadded")
+    private Instant dateadded;
+
+    public Instant getDateadded() {
+        return dateadded;
+    }
+
+    public void setDateadded(Instant dateadded) {
+        this.dateadded = dateadded;
+    }
 
     public Long getId() {
         return id;

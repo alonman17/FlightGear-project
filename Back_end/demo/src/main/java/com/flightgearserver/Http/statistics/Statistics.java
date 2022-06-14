@@ -1,13 +1,13 @@
-package flightgearserver.Http.statistics;
+package com.flightgearserver.Http.statistics;
 
 
-import main.java.com.flightgearserver.Http.Entiteis.Flight;
-import flightgearserver.agent.AgentManager;
+import com.flightgearserver.Http.Entiteis.Aircraft;
+import com.flightgearserver.Http.Entiteis.Flight;
+import com.flightgearserver.agent.AgentManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.time.temporal.TemporalField;
+import java.util.*;
 
 public class Statistics {
 
@@ -18,6 +18,7 @@ public class Statistics {
            Map<String,Double> x=new HashMap<>();
            x.put("aircraftid", Double.valueOf(f.getAircraftid()));
            x.put("millagedone",f.getMilagedone());
+           list.add(x);
        });
        return list;
    }
@@ -28,4 +29,21 @@ public class Statistics {
        return AgentManager.getInstance().getCountOfAgents();
    }
    //TODO:think about more statistics to get
+
+
+    public static Map<Integer,Double> AllMonthsAllAircrafts(List<Flight> flights, int year){
+        Map<Integer,Double> map=new HashMap<>();
+        for(int i=1;i<=12;i++){
+            map.put(i,getMillagePerMonthAll(flights,i).stream().mapToDouble(m->m.get("millagedone")).sum()/AgentManager.getInstance().getNumOfAicrafts());
+        }
+        return map;
+    }
+    public static Map<Integer,Integer> AccumulatingAircraftsPerMonth(List<Aircraft> aircrafts, int year) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 1; i <= 12; i++) {
+            int finalI = i;
+            map.put(i, (int) (map.getOrDefault(i - 1, 0) + aircrafts.stream().filter(a -> Date.from(a.getDateadded()).getMonth()+1 == finalI).count()));
+        }
+        return map;
+    }
 }
