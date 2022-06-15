@@ -4,20 +4,26 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import LineChartMonitoring from './lineChartMonitoring';
+import {data}  from './lineChartMonitoring';
+
+import { Line } from 'react-chartjs-2';
+import {options} from './lineChartMonitoring';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     height: 400,
     maxWidth: 300,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper},    
 }));
+//theme.palette.background.paper
 
 
-function renderRow(props) {
+export function renderRow(props) {
   const { index, style } = props;
-  const names=['aileron',
+  const names=[
+  'aileron',
   'elevator',
   'rudder'
   ,'flaps'
@@ -59,26 +65,43 @@ function renderRow(props) {
   ,'turn-indicator_indicated-turn-rate'
   ,'vertical-speed-indicator_indicated-speed-fpm'
   ,'engine_rpm'];
+
+  function handleClick() {
+   
+      console.log(names[index]);
+      console.log(data.datasets[0].borderColor);
+      data.datasets[0].borderColor='green';
+    
+      console.log(data.datasets[0].borderColor);  
+
+    // console.log(names[index]);
+    // console.log(data.datasets[0].borderColor);
+    // data.datasets[0].borderColor='green';
+    // console.log(data.datasets[0].borderColor);
+    
+  }
   return (
     
     <ListItem button style={style} key={names[index]}>
       {/* <ListItemText primary={`Item ${index + 1}`} /> */}
-      <ListItemText primary={`${ names[index]}`} />
-    </ListItem>
+     
+      <ListItemText primary={`${ names[index]}`} onClick={handleClick}/>
+    </ListItem >
     
   );
 }
 
 renderRow.propTypes = {
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   style: PropTypes.object.isRequired,
+  
 };
 
 export default function VirtualizedList() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       <FixedSizeList height={400} width={300} itemSize={46} itemCount={41}>
         {renderRow}
       </FixedSizeList>
