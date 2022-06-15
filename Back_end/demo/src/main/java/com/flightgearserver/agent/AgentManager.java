@@ -38,7 +38,8 @@ public class AgentManager {
     @Autowired
     private AgentManager() {
         this.service= ApplicationContextUtils.getApplicationContext().getBean(AircraftService.class);
-        this.numOfAicrafts=service.getAll().size();
+        //this.numOfAicrafts=service.getAll().size();
+        this.numOfAicrafts=10;
         clients=new HashMap<>();
         aircraftIds=new int[numOfAicrafts];
 
