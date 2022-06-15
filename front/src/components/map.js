@@ -32,14 +32,12 @@ function aircraftPosition(position) {
 
 function Map() {
 
-
-
     const MarkersLists = (props) => { 
-        
+      const AllairCrafts= props.data
         return (
             <div>
               {
-                    aircrafts.map(aircraft => (
+                    AllairCrafts.map(aircraft => (
                         <div key={aircraft.name}>
                             <Marker eventHandlers={{
                                 click: (e) => {
@@ -55,9 +53,9 @@ function Map() {
                                 <Popup  ><div>
                                             <ul style={{fontSize:'20px',position:'relative' ,marginLeft:'-2vw'}}>
                                                 <li>Name:{aircraft.name} </li>
-                                                <li>Yaw:{aircraft.yaw} </li>
-                                                <li>Speed:{aircraft.speed} </li>
-                                                <li>Height:{aircraft.height} </li>
+                                                <li>Yaw:{aircraft['vertical-speed-fps']} </li>
+                                                <li>Speed:{aircraft['vertical-speed-fps']} </li>
+                                                <li>Height:{aircraft['vertical-speed-fps']} </li>
                                             </ul>
                                     </div></Popup>
                             </Marker>

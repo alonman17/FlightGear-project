@@ -103,7 +103,7 @@ return(
                 onChange={(e)=>console.log(e.target.value)}
                 />
     
-        <Tilt tiltAngleXManual={manualTiltAngleX} tiltAngleYManual={manualTiltAngleY} glareEnable={true}>
+                 <Tilt tiltAngleXManual={manualTiltAngleX} tiltAngleYManual={manualTiltAngleY} glareEnable={true}>
                     <div className="aircraftBackground">
                         <AirplanemodeActiveIcon style={{width: '40%', height: '40%'}} />
                       
