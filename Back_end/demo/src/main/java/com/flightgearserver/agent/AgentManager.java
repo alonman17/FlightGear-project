@@ -128,6 +128,6 @@ public class AgentManager {
         var aircraft=aircraftService.getAircraft(agentHandler.getId()+1);
         aircraft.setMillage(aircraft.getMillage()+milagedone);
         aircraftService.save(aircraft);
-        flightDataService.saveTsToDB(agentHandler.getTs(),flightsService.getAllFlights().size());
+        flightDataService.saveTsToDB(agentHandler.getTs(), Math.toIntExact(flightsService.getAllFlights().get(flightsService.getAllFlights().size() - 1).getId()));
     }
 }
