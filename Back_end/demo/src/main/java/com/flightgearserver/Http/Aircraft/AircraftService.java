@@ -23,4 +23,8 @@ public class AircraftService {
     public Aircraft getAircraft(long id) {
         return repository.findById(id).get();
     }
+
+    public void save(Aircraft aircraft) {
+        repository.save(aircraft);
+    }
 }

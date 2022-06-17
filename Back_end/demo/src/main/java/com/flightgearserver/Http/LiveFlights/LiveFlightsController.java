@@ -15,15 +15,79 @@ public class LiveFlightsController {
         this.service = service;
     }
 
+    /**
+     * used to get the live data for the agent with the given id
+     * example response:
+     * {
+     *   "airspeed-kt": 0,
+     *   "throttle1": 0,
+     *   "throttle0": 0,
+     *   "engine-pump1": 0,
+     *   "electric-pump0": 0,
+     *   "gps_indicated-vertical-speed": 0,
+     *   "engine-pump0": 0,
+     *   "electric-pump1": 0,
+     *   "attitude-indicator_indicated-pitch-deg": 12,
+     *   "encoder_indicated-altitude-ft": 0,
+     *   "gps_indicated-ground-speed-kt": 0,
+     *   "vertical-speed-fps": 0,
+     *   "flaps": 0,
+     *   "heading-deg": 180.018387,
+     *   "elevator": 0,
+     *   "longitude-deg": -22.6054255528,
+     *   "altimeter_indicated-altitude-ft": 281.535034,
+     *   "encoder_pressure-alt-ft": 0,
+     *   "rudder": 0,
+     *   "latitude-deg": 63.9918353378,
+     *   "indicated-heading-deg": 282.893036,
+     *   "aileron": 0,
+     *   "roll-deg": 0,
+     *   "speedbrake": 0,
+     *   "external-power": 0,
+     *   "slats": 0,
+     *   "airspeed-indicator_indicated-speed-kt": 0,
+     *   "gps_indicated-altitude-ft": 0,
+     *   "vertical-speed-indicator_indicated-speed-fpm": 0,
+     *   "pitch-deg": 0.424,
+     *   "side-slip-deg": 0,
+     *   "altimeter_pressure-alt-ft": 1.193444,
+     *   "engine_rpm": 0,
+     *   "glideslope": 0,
+     *   "magnetic-compass_indicated-heading-deg": 0,
+     *   "altitude-ft": -9999,
+     *   "attitude-indicator_indicated-roll-deg": 40,
+     *   "slip-skid-ball_indicated-slip-skid": 0,
+     *   "APU-generator": 0,
+     *   "attitude-indicator_internal-roll-deg": 0,
+     *   "turn-indicator_indicated-turn-rate": 0,
+     *   "attitude-indicator_internal-pitch-deg": 0
+     * }
+     * @param id
+     * @return
+     */
     @GetMapping("api/liveFlights/{id}")
     public Map<String, Double> getFlight(@PathVariable("id") int id){
         return service.getAgentCurrentData(id);
     }
 
+    /**
+     * used to get the live data for specific value with the given agent id*
+     * 22.25656
+     * @param id
+     * @param value
+     * @return
+     */
     @GetMapping("api/liveFlights/{id}/{value}")
     public Double getAgentSpecificValue(@PathVariable("id") int id,@PathVariable("value") String value){
         return service.getAgentSpecificValue(id,value);
     }
+
+    /**
+     * used to get all the live data for all the agents
+     * example response:
+     *
+     * @return
+     */
     @GetMapping("api/liveFlights/all")
     public Map<Integer, FlightLiveValues> getAllLiveFlightsValues(){
         return service.getAllLiveFlightsValues();

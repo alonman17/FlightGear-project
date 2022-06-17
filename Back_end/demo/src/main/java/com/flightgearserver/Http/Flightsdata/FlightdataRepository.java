@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface FlightdataRepository extends JpaRepository<Flightsdatum,Long> {
     @Query(value = "SELECT a from Flightsdatum as a  where a.flightid=?1")
-    List<Flightsdatum> findAllFlightData(Long id);
+    List<Flightsdatum> findAllFlightData(Integer id);
 }

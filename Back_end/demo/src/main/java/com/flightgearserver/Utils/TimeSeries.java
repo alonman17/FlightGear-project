@@ -2,9 +2,13 @@ package com.flightgearserver.Utils;
 
 
 
+import com.flightgearserver.Http.Entiteis.Flightsdatum;
+import com.opencsv.CSVParser;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class TimeSeries {
@@ -125,7 +129,8 @@ public class TimeSeries {
 		sb.deleteCharAt(sb.length()-1);
 		writer.println(sb);
 		sb.setLength(0);
-		for (int i = 0; i < data.get(0).size(); i++) {
+		System.out.println(data.size()+ " " +data.get(0).size());
+		for (int i = 0; i < data.get(0).size()-1; i++) {
 			for (int j = 0; j < data.size(); j++) {
 				sb.append(data.get(j).get(i)+",");
 			}
@@ -155,4 +160,6 @@ public class TimeSeries {
 
 		return sb.toString();
 	}
+
+
 }
