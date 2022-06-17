@@ -43,7 +43,7 @@ public class LiveFlightsService {
         manager.getAgent(id).writeToClient(sb.toString());
     }
     //TODO: implement this
-    public void sendDataToInterpeter(int id, String[] data) {
-
+    public void sendDataToInterpeter(int id, String data) {
+        manager.getAgent(id).writeToClient(data);
     }
 }

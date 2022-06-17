@@ -94,11 +94,13 @@ public class LiveFlightsController {
     }
     @PostMapping("api/liveFlights/{id}")
     public void sendDataToAgent(@PathVariable("id") int id,@RequestBody Map<String,Double> data){
-        service.sendDataToAgent(id,data);
+        //service.sendDataToAgent(id,data);
+        System.out.println(id + " " + data);
     }
     @PostMapping ("api/liveFlights/intepater/{id}")
-    public void sendDataToInterpeter(@PathVariable("id") int id,@RequestBody String[] data){
+    public void sendDataToInterpeter(@PathVariable("id") int id,@RequestBody String data){
         service.sendDataToInterpeter(id,data);
+        System.out.println(data);
     }
     @GetMapping("api/liveFlights/test")
     public String test(){
