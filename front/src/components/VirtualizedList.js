@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -67,24 +67,11 @@ export function renderRow(props) {
     "engine_rpm",
   ];
 
-  function handleClick(e) {
-    console.log(names[index]);
-    console.log(data.datasets[0].borderColor);
-    data.datasets[0].borderColor = "green";
-    console.log(data.datasets[0].borderColor);
-    // props.setValue();
-
-    // console.log(names[index]);
-    // console.log(data.datasets[0].borderColor);
-    // data.datasets[0].borderColor='green';
-    // console.log(data.datasets[0].borderColor);
-  }
-
   return (
     <ListItem button style={style} key={index} value={`${names[index]}`}>
       {/* <ListItemText primary={`Item ${index + 1}`} /> */}
 
-      <ListItemText primary={`${names[index]}`} onClick={handleClick} />
+      <ListItemText primary={`${names[index]}`} />
     </ListItem>
   );
 }
@@ -96,16 +83,22 @@ renderRow.propTypes = {
 
 export default function VirtualizedList(props) {
   const classes = useStyles();
+  const func = (e) => {
+    props.setValue(e.target.firstChild.nodeValue);
+  };
+
+  const outerElementType = forwardRef((props, ref) => (
+    <div ref={ref} onClick={func} {...props} />
+  ));
 
   return (
     <div className={classes.root}>
       <FixedSizeList
+        outerElementType={outerElementType}
         height={400}
         width={300}
         itemSize={46}
         itemCount={41}
-        setValue={props.setValue}
-        onItemsRendered={(e) => console.log(e)}
       >
         {renderRow}
       </FixedSizeList>

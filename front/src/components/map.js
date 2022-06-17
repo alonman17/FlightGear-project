@@ -30,34 +30,28 @@ function aircraftPosition(position) {
 
 
 
-function Map() {
+function Map(props) {
 
-
-
-    const MarkersLists = (props) => { 
-        
+    const MarkersLists = () => { 
+      const Obj = props.data
+      const AllairCrafts= Object.keys( props.data)
         return (
             <div>
               {
-                    aircrafts.map(aircraft => (
-                        <div key={aircraft.name}>
+                    AllairCrafts.map((id) => (
+                        <div key={id}>
                             <Marker eventHandlers={{
-                                click: (e) => {
-                                    // this.props.history.push("/monitoring")
-                                },
-                                dblclick:(e)=>{
-                                  //  <Link to={'/monitoring/2'}></Link>
-                                }
-                            }} position={aircraftPosition(aircraft.position)} icon={L.divIcon({
+                             
+                            }} position={aircraftPosition({'lat':51.505,'long': -0.09})} icon={L.divIcon({
                                 className: "my-custom-pin",
-                                html:`<div style="transform:rotate(${aircraft.yaw}deg);">${iconMarkup} </div>`
+                                html:`<div style="transform:rotate(${Obj[`${id}`]['latitude-deg"']}deg);">${iconMarkup} </div>`
                             })} >
                                 <Popup  ><div>
                                             <ul style={{fontSize:'20px',position:'relative' ,marginLeft:'-2vw'}}>
-                                                <li>Name:{aircraft.name} </li>
-                                                <li>Yaw:{aircraft.yaw} </li>
-                                                <li>Speed:{aircraft.speed} </li>
-                                                <li>Height:{aircraft.height} </li>
+                                                <li>Name:{2} </li>
+                                                {/* <li>Yaw:{Obj[`${id}`]['latitude-deg"']} </li>
+                                                <li>Speed:{Obj[`${id}`]['airspeed-kt']} </li>
+                                                <li>Height:{Obj[`${id}`]['altitude-ft']} </li> */}
                                             </ul>
                                     </div></Popup>
                             </Marker>

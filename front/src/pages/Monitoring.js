@@ -10,20 +10,24 @@ import VerticalSpeed from "../components/clocks/verticalSpeed"
 import Height from "../components/clocks/height"
 import Horizon from "../components/clocks/horizon"
 import Turn from "../components/clocks/turn"
-import {useState} from "react"
+import {useState,useEffect} from "react"
 
 export default function Monitoring (){
-     function check(paams) {
-         console.log("check")
-    }
-    const [value,setValue]=useState()
+    const [value,setValue]=useState('')
+   const SET = (val) => { 
+
+        setValue(val) 
+      }
+      useEffect(() => {
+        console.log(value)
+      },[value])
     return (<div >
          <Sidebar />
-        <h1 style={{position:'absolute',left:'40%' , top:'10%'}}> Monitoring</h1>
+        <h1 style={{position:'absolute',left:'40%' , top:'10%'}}> Monitoring {value }</h1>
         <div style={{backgroundColor:'white'}}>
         <div style={{position:'absolute' , left:'25%',top:'25%' }}>
-            <VirtualizedList setValue={check}/>
-            <h1>{value}</h1> 
+            <VirtualizedList setValue={SET}/>
+            
         </div>
         <div style={{position:'absolute' , left:'78%', right:'0%',top:'30%' ,width:'20vw'}}>
             {/* <h1>Joystick</h1> */}
