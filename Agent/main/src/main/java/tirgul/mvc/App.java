@@ -6,7 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import tirgul.model.AgentServer;
+import tirgul.model.FgClientHandler;
+import tirgul.model.Model;
 import tirgul.view.Cli;
+import tirgul.view.ViewServer;
+import tirgul.Controller.Controller;
 
 import java.io.IOException;
 
@@ -24,9 +29,15 @@ public class App extends Application {
         scene = new Scene(root, 640, 480);
         stage.setScene(scene);
         stage.show();
-        PrimaryController pc = fxl.getController();
-        Cli cli = new Cli();
-        cli.start();
+        PrimaryController pc = new PrimaryController();
+
+        Model model = new Model();
+
+        //ViewServer backendServer = new ViewServer(5500);
+        //new Thread(() -> backendServer.startServer()).start();
+
+        Controller controller = new Controller();
+
     }
 
     static void setRoot(String fxml) throws IOException {

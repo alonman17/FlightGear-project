@@ -9,7 +9,8 @@ import javafx.scene.canvas.GraphicsContext;
 public class PrimaryController {
 
     @FXML
-    Canvas joystick;
+    Canvas joystick = new Canvas();
+
     void paint() throws IOException {
         GraphicsContext gc = joystick.getGraphicsContext2D();
         double mx = joystick.getWidth() / 2;
