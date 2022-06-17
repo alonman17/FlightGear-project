@@ -66,13 +66,14 @@ export function renderRow(props) {
   ,'vertical-speed-indicator_indicated-speed-fpm'
   ,'engine_rpm'];
 
-  function handleClick() {
+  function handleClick(e) {
    
       console.log(names[index]);
       console.log(data.datasets[0].borderColor);
       data.datasets[0].borderColor='green';
-    
-      console.log(data.datasets[0].borderColor);  
+      console.log(data.datasets[0].borderColor);
+      // props.setValue();
+
 
     // console.log(names[index]);
     // console.log(data.datasets[0].borderColor);
@@ -80,9 +81,10 @@ export function renderRow(props) {
     // console.log(data.datasets[0].borderColor);
     
   }
+  
   return (
     
-    <ListItem button style={style} key={names[index]}>
+    <ListItem button style={style} key={index} value={`${ names[index]}`}>
       {/* <ListItemText primary={`Item ${index + 1}`} /> */}
      
       <ListItemText primary={`${ names[index]}`} onClick={handleClick}/>
@@ -97,12 +99,13 @@ renderRow.propTypes = {
   
 };
 
-export default function VirtualizedList() {
+export default function VirtualizedList(props) {
   const classes = useStyles();
+  
 
   return (
     <div className={classes.root} >
-      <FixedSizeList height={400} width={300} itemSize={46} itemCount={41}>
+      <FixedSizeList height={400} width={300} itemSize={46} itemCount={41} setValue={props.setValue} onItemsRendered={e =>console.log(e)}>
         {renderRow}
       </FixedSizeList>
     </div>

@@ -61,6 +61,6 @@ export const data = {
 };
 
 export default function LineChartMonitoring() {
-  return <Line options={options} data={data} />;
+    return <Line options={options} data={data} />;
 }
 
