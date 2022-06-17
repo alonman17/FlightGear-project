@@ -1,5 +1,7 @@
 package com.flightgearserver.demo.agent;
 
+import com.flightgearserver.demo.Interperter.Interpreter;
+import com.flightgearserver.demo.Interperter.SharedMemory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +28,7 @@ public class AgentManager {
     Logger logger= LoggerFactory.getLogger("agentManager");
     //Helper property to make this observable
     private PropertyChangeSupport support;
+
 
     private AgentManager() {
         clients=new HashMap<>();

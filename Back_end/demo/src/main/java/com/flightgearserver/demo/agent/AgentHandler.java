@@ -1,5 +1,7 @@
 package com.flightgearserver.demo.agent;
 
+import com.flightgearserver.demo.Interperter.Interpreter;
+import com.flightgearserver.demo.Interperter.SharedMemory;
 import com.flightgearserver.demo.Utils.TimeSeries;
 import com.flightgearserver.demo.liveCache.FlightLiveValues;
 import org.slf4j.Logger;
@@ -16,6 +18,11 @@ public class AgentHandler {
     private Scanner in;
     private PrintWriter out;
     private volatile boolean stop=false;
+
+    public SharedMemory sharedMemory = new SharedMemory();
+
+    public Interpreter interpreter = new Interpreter(this,sharedMemory);
+
     public int getId() {
         return id;
     }
@@ -97,5 +104,6 @@ public class AgentHandler {
         out.close();
         AgentManager.getInstance().removeAgent(id);
     }
+
 
 }

@@ -1,12 +1,13 @@
 package com.flightgearserver.demo.liveCache;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Used to manage live values from a single flight
  */
 public class FlightLiveValues {
-    Map<String,Double> values;
+    public Map<String,Double> values = new HashMap<>();
 
     /**
      * Used to add all values to a map with the value of 0
