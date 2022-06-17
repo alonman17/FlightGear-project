@@ -7,11 +7,11 @@ import javax.persistence.*;
 public class Flightsdatum {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "flightid", nullable = false)
-    private Flight flightid;
+    private int flightid;
 
     @Column(name = "\"timestamp\"", nullable = false)
     private Long timestamp;
@@ -141,6 +141,57 @@ public class Flightsdatum {
 
     @Column(name = "engine_rpm")
     private Double engineRpm;
+    public Flightsdatum(String[] values,long timestamp,int Flightid) {
+        this.timestamp=timestamp;
+        this.flightid=Flightid;
+        this.aileron=Double.parseDouble(values[0]);
+        this.elevator=Double.parseDouble(values[1]);
+        this.rudder=Double.parseDouble(values[2]);
+        this.flaps=Double.parseDouble(values[3]);
+        this.slats=Double.parseDouble(values[4]);
+        this.speedbrake=Double.parseDouble(values[5]);
+        this.throttle0=Double.parseDouble(values[6]);
+        this.throttle1=Double.parseDouble(values[7]);
+        this.enginePump0=Double.parseDouble(values[8]);
+        this.enginePump1=Double.parseDouble(values[9]);
+        this.electricPump0=Double.parseDouble(values[10]);
+        this.electricPump1=Double.parseDouble(values[11]);
+        this.externalPower=Double.parseDouble(values[12]);
+        this.apuGenerator=Double.parseDouble(values[13]);
+        this.latitudeDeg=Double.parseDouble(values[14]);
+        this.longitudeDeg=Double.parseDouble(values[15]);
+        this.altitudeFt=Double.parseDouble(values[16]);
+        this.rollDeg=Double.parseDouble(values[17]);
+        this.pitchDeg=Double.parseDouble(values[18]);
+        this.headingDeg=Double.parseDouble(values[19]);
+        this.sideSlipDeg=Double.parseDouble(values[20]);
+        this.airspeedKt=Double.parseDouble(values[21]);
+        this.glideslope=Double.parseDouble(values[22]);
+        this.verticalSpeedFps=Double.parseDouble(values[23]);
+        this.airspeedIndicatorIndicatedSpeedKt=Double.parseDouble(values[24]);
+        this.altimeterIndicatedAltitudeFt=Double.parseDouble(values[25]);
+        this.altimeterPressureAltFt=Double.parseDouble(values[26]);
+        this.attitudeIndicatorIndicatedPitchDeg=Double.parseDouble(values[27]);
+        this.attitudeIndicatorIndicatedRollDeg=Double.parseDouble(values[28]);
+        this.attitudeIndicatorInternalPitchDeg=Double.parseDouble(values[29]);
+        this.attitudeIndicatorInternalRollDeg=Double.parseDouble(values[30]);
+        this.encoderIndicatedAltitudeFt=Double.parseDouble(values[31]);
+        this.encoderPressureAltFt=Double.parseDouble(values[32]);
+        this.gpsIndicatedAltitudeFt=Double.parseDouble(values[33]);
+        this.gpsIndicatedGroundSpeedKt=Double.parseDouble(values[34]);
+        this.gpsIndicatedVerticalSpeed=Double.parseDouble(values[35]);
+        this.indicatedHeadingDeg=Double.parseDouble(values[36]);
+        this.magneticCompassIndicatedHeadingDeg=Double.parseDouble(values[37]);
+        this.slipSkidBallIndicatedSlipSkid=Double.parseDouble(values[38]);
+        this.turnIndicatorIndicatedTurnRate=Double.parseDouble(values[39]);
+        this.verticalSpeedIndicatorIndicatedSpeedFpm=Double.parseDouble(values[40]);
+        this.engineRpm=Double.parseDouble(values[41]);
+
+    }
+
+    public Flightsdatum() {
+
+    }
 
     public Long getId() {
         return id;
@@ -150,11 +201,11 @@ public class Flightsdatum {
         this.id = id;
     }
 
-    public Flight getFlightid() {
+    public int getFlightid() {
         return flightid;
     }
 
-    public void setFlightid(Flight flightid) {
+    public void setFlightid(int flightid) {
         this.flightid = flightid;
     }
 

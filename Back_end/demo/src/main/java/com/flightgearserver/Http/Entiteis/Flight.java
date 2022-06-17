@@ -37,6 +37,19 @@ public class Flight {
     @Column(name = "aircraftid")
     private Integer aircraftid;
 
+    public Flight(LocalTime starttime, LocalTime endtime, LocalDate date, String startpoint, String endpoint, Integer aircraftid, Double milagedone) {
+        this.starttime = starttime;
+        this.endtime = endtime;
+        this.date = date;
+        this.startpoint = startpoint;
+        this.endpoint = endpoint;
+        this.aircraftid = aircraftid;
+        this.milagedone = milagedone;
+    }
+
+    public Flight() {
+    }
+
     public Double getMilagedone() {
         return milagedone;
     }

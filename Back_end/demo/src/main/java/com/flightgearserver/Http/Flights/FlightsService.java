@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -37,7 +36,7 @@ public class FlightsService {
     }
 
     public List<Flightsdatum> getFightData(Long id){
-        return flightdataRepository.findAllFlightData(id);
+        return flightdataRepository.findAllFlightData(Math.toIntExact(id));
     }
 
     public List<Flightsdatum> getData(){
@@ -53,5 +52,9 @@ public class FlightsService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void save(Flight flight) {
+        flightsRepository.save(flight);
     }
 }

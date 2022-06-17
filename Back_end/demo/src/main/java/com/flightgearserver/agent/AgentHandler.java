@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class AgentHandler {
@@ -15,6 +16,13 @@ public class AgentHandler {
     private Scanner in;
     private PrintWriter out;
     private volatile boolean stop=false;
+    private int id;
+    private final LocalTime startTime=LocalTime.now();
+    private double millagedone=0;
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
     public int getId() {
         return id;
     }
@@ -23,7 +31,7 @@ public class AgentHandler {
         this.id = id;
     }
 
-    private int id;
+
     public TimeSeries getTs() {
         return ts;
     }
@@ -64,20 +72,14 @@ public class AgentHandler {
                 while (!stop&&in.hasNext()){
                     StringBuilder stringBuilder=new StringBuilder();
                     String line=in.nextLine();
-
-                    //ts.addRow(line);
                     //Assuming our lines comes out as valName:value,valName1:value1....
                     try {
-
-
                         String[] values = line.split(",");
                         for (int i = 0; i < values.length; i++) {
-
                             String[] temp = values[i].split(":");
                             flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
                             stringBuilder.append(temp[1] + ",");
                         }
-
                         //logger.info(stringBuilder.toString());
                         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
                         ts.addRow(stringBuilder.toString());
@@ -90,7 +92,7 @@ public class AgentHandler {
                 }
                 close();
             }).run();
-            //ts.exportToCsv("test.csv");
+            AgentManager.getInstance().saveFlight(this);
     }
     public void writeToClient(String line){
         logger.info("Writing to agent : "+ line);

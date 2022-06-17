@@ -2,6 +2,11 @@ package com.flightgearserver.agent;
 
 import com.flightgearserver.ApplicationContextUtils;
 import com.flightgearserver.Http.Aircraft.AircraftService;
+import com.flightgearserver.Http.Entiteis.Flight;
+import com.flightgearserver.Http.Flights.FlightsService;
+import com.flightgearserver.Http.Flightsdata.FlightDataService;
+import com.flightgearserver.Utils.Location;
+import com.flightgearserver.Utils.TimeSeries;
 import com.flightgearserver.liveCache.FlightLiveValues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +16,8 @@ import org.springframework.context.annotation.Scope;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -24,7 +31,9 @@ public class AgentManager {
     private static AgentManager manager;
     private Map<Integer, AgentHandler> clients;
     //TODO FIX THE SERVICE
-    private AircraftService service;
+    private AircraftService aircraftService;
+    private FlightDataService flightDataService;
+    private FlightsService flightsService;
     private int[] aircraftIds;
     private int numOfAicrafts;
 
@@ -37,9 +46,11 @@ public class AgentManager {
     private PropertyChangeSupport support;
     @Autowired
     private AgentManager() {
-        this.service= ApplicationContextUtils.getApplicationContext().getBean(AircraftService.class);
-        //this.numOfAicrafts=service.getAll().size();
-        this.numOfAicrafts=10;
+        this.aircraftService= ApplicationContextUtils.getApplicationContext().getBean(AircraftService.class);
+        this.flightDataService= ApplicationContextUtils.getApplicationContext().getBean(FlightDataService.class);
+        this.flightsService= ApplicationContextUtils.getApplicationContext().getBean(FlightsService.class);
+        this.numOfAicrafts=aircraftService.getAll().size();
+        //this.numOfAicrafts=10;
         clients=new HashMap<>();
         aircraftIds=new int[numOfAicrafts];
 
@@ -63,7 +74,7 @@ public class AgentManager {
     private int findFreeAircraft(){
         Random random=new Random();
         for (int i = 0; i < aircraftIds.length; i++) {
-                int x=random.nextInt(10);
+                int x=random.nextInt(numOfAicrafts);
                 if(aircraftIds[x]==1) {
                     continue;
                 }
@@ -101,5 +112,22 @@ public class AgentManager {
 
     public int getCountOfAgents() {
         return clients.size();
+    }
+
+    public void saveFlight(AgentHandler agentHandler) {
+        double milagedone=0;
+        var lon=agentHandler.getTs().getColByName("longitude-deg");
+        var lat=agentHandler.getTs().getColByName("latitude-deg");
+        //caulate milage every 100 timestamps
+        Location lastLocation=new Location(lat.get(0),lon.get(0));
+        for (int i = 100; i < lat.size(); i+=100) {
+            milagedone+=(Location.distance(lastLocation,new Location(lat.get(i),lon.get(i)))/1000);
+        }
+        logger.info("Milage done: " + milagedone);
+        flightsService.save(new Flight(agentHandler.getStartTime(), LocalTime.now(), LocalDate.now(),lat.get(0) + " " + lon.get(0),lat.get(lat.size()-1) + " " +lon.get(lon.size()-1),agentHandler.getId()+1,milagedone));
+        var aircraft=aircraftService.getAircraft(agentHandler.getId()+1);
+        aircraft.setMillage(aircraft.getMillage()+milagedone);
+        aircraftService.save(aircraft);
+        flightDataService.saveTsToDB(agentHandler.getTs(),flightsService.getAllFlights().size());
     }
 }
