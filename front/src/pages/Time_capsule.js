@@ -13,6 +13,11 @@ import { useState } from "react";
 import DiscreteSlider from "../components/videoSlider";
 
 export default function TimeCapsule() {
+  const [value, setValue] = useState();
+  function c() {
+    setValue(0.5);
+    console.log("3");
+  }
   return (
     <div>
       <Sidebar />
@@ -87,7 +92,7 @@ export default function TimeCapsule() {
           </b>
         </div>
         <div>
-          <DiscreteSlider />
+          <DiscreteSlider value={value} setValue={c} />
         </div>
       </div>
     </div>
