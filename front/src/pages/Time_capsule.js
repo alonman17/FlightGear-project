@@ -13,17 +13,29 @@ import { useState } from "react";
 import DiscreteSlider from "../components/videoSlider";
 
 export default function TimeCapsule() {
-  const [value, setValue] = useState();
-  function c() {
-    setValue(0.5);
-    console.log("3");
+  const [val, setValue] = useState(0);
+  // function c() {
+  //   // setValue(0.5);
+  //   console.log(val);
+  // }
+  function otomaticSlider() {
+    const time = setInterval(() => {
+      setValue(val + 0.01);
+
+      if (val === 1) {
+        clearInterval(time);
+      }
+    }, 10);
   }
+
+  otomaticSlider();
+
   return (
     <div>
       <Sidebar />
       <h1 style={{ position: "absolute", left: "40%", top: "10%" }}>
         {" "}
-        Time Capsule
+        Time Capsule{val}
       </h1>
       <Sidebar />
       <div style={{ backgroundColor: "white" }}>
@@ -92,7 +104,7 @@ export default function TimeCapsule() {
           </b>
         </div>
         <div>
-          <DiscreteSlider value={value} setValue={c} />
+          <DiscreteSlider val={val} setValue={setValue} />
         </div>
       </div>
     </div>
