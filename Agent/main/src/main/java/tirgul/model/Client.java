@@ -18,7 +18,10 @@ public class Client {
 
     public Client() {
         properties = new HashMap<>();
-        while (!AgentServer.connected);
+        System.out.println("Waiting For Flight-Gear Aplication To Start ... ");
+        while (!AgentServer.connected)
+            ;
+        System.out.println();
         try {
             client = new Socket("127.0.0.1", 5402);
             out2fg = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
@@ -29,7 +32,9 @@ public class Client {
         }
 
         try {
+
             BufferedReader br = new BufferedReader(new FileReader(new File("src/main/resources/properties.txt")));
+
             String line;
             while ((line = br.readLine()) != null) {
                 String[] sp = line.split(",");

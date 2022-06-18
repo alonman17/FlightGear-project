@@ -38,7 +38,8 @@ public class ViewServer {
                     System.out.println("Client Has Connected To BackendServer From: " + client.getPort());
                     scanner = new Scanner(new InputStreamReader(client.getInputStream()));
                     out = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
-                    new Thread(() -> fgClient.writeToCsv(scanner, out, "BackendCSV.txt")).start();
+                    new Thread(() -> fgClient.writeToCsv(scanner, out, "Agent/main/src/main/resources/BackendCSV.txt"))
+                            .start();
 
                 }
 

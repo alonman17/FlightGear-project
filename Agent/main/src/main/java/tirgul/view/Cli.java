@@ -15,7 +15,7 @@ public class Cli implements Icli {
 
         StringBuilder menu = new StringBuilder();
         try {
-            BufferedReader bf = new BufferedReader(new FileReader("cli_menu.txt"));
+            BufferedReader bf = new BufferedReader(new FileReader("Agent/main/src/main/resources/cli_menu.txt"));
             String line = "";
 
             while ((line = bf.readLine()) != null) {

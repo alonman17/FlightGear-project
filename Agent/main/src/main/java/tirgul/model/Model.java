@@ -5,7 +5,6 @@ import java.util.Observable;
 @SuppressWarnings("deprecation")
 public class Model extends Observable {
 
-    
    public AgentServer agentServer;
    public Client client; 
 

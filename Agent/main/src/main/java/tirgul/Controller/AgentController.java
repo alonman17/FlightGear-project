@@ -23,7 +23,7 @@ public class AgentController {
         dataHandler = new DataHandler();
     }
 
-    public void connectToDB(String ip, int port) {
+    public void connectToBackendServer(String ip, int port) {
 
         try {
             backeEndSocket = new Socket(ip, port);
