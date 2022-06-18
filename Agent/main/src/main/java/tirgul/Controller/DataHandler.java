@@ -37,8 +37,8 @@ public class DataHandler {
 
             try {
 
-                in = new Scanner(new FileReader("src/main/resources/symbol.txt"));
-              
+                in = new Scanner(new FileReader("Agent/main/src/main/resources/symbol.txt"));
+
                 while (in.hasNext()) {
                     sb.append(in.nextLine() + ":,");
                 }

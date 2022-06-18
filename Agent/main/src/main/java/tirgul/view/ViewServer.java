@@ -19,7 +19,7 @@ public class ViewServer {
     PrintWriter out;
     FgClientHandler fgClient;
     int port;
-    private boolean stop = false;
+    private volatile boolean stop = false;
 
     public ViewServer(int port) {
         this.port = port;
@@ -40,7 +40,6 @@ public class ViewServer {
                     out = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
                     new Thread(() -> fgClient.writeToCsv(scanner, out, "Agent/main/src/main/resources/BackendCSV.txt"))
                             .start();
-
                 }
 
             } catch (SocketException e) {
