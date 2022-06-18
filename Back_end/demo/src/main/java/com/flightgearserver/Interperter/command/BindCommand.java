@@ -21,18 +21,25 @@ public class BindCommand implements Command{
     @Override
     public int execute(ArrayList<String> tokens, int index) {
         String bindCommand = tokens.get(index+1);
-        String varName = tokens.get(index-2);
+        String agentVarName = this.getAgentVarName(bindCommand);
+        String varName = tokens.get(index - 2);
         Variable var  = sharedMemory.symbolTable.get(varName);
         var.setBindTo(bindCommand);
         sharedMemory.isBind.put(varName,var);
-        this.updateValueFromAgent(varName);
+        this.updateValueFromAgent(agentVarName,varName);
 
         return 1;
     }
 
-    private void updateValueFromAgent(String varName) {
-        Double varValue = agent.getFlightLiveValues().values.get(varName);
+    private void updateValueFromAgent(String agentvarName,String varName) {
+        Double varValue = agent.getFlightLiveValues().values.get(agentvarName);
         sharedMemory.symbolTable.get(varName).setValue(Float.parseFloat(String.valueOf(varValue)));
         sharedMemory.isBind.get(varName).setValue(Float.parseFloat(String.valueOf(varValue)));
+    }
+    private String getAgentVarName(String varName){
+        String[] strings = varName.split("/");
+        String line = strings[strings.length -1 ];
+        return line;
+
     }
 }
