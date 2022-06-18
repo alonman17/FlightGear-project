@@ -14,8 +14,8 @@ public class AgentRun {
 
         // Runing a Demo Backend Server For Testing //
 
-        ViewServer backendServer = new ViewServer(5500);
-        new Thread(() -> backendServer.startServer()).start();
+//        ViewServer backendServer = new ViewServer(5500);
+//        new Thread(() -> backendServer.startServer()).start();
 
         // Connecting to the Backend Server.
         // NOTE: Connection will hapen only if the FlightGear app has started a flight.

@@ -62,6 +62,7 @@ public class AgentController {
             while (inFromBackend.hasNext()) {
                 sb.append(inFromBackend.nextLine());
                 pilot.sendCommands(sb.toString());
+                sb.setLength(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
