@@ -1,5 +1,7 @@
 package com.flightgearserver.agent;
 
+import com.flightgearserver.Interperter.Interpreter;
+import com.flightgearserver.Interperter.SharedMemory;
 import com.flightgearserver.Utils.TimeSeries;
 import com.flightgearserver.liveCache.FlightLiveValues;
 import org.slf4j.Logger;
@@ -18,7 +20,10 @@ public class AgentHandler {
     private volatile boolean stop=false;
     private int id;
     private final LocalTime startTime=LocalTime.now();
-    private double millagedone=0;
+
+    public SharedMemory sharedMemory = new SharedMemory();
+
+    public Interpreter interpreter = new Interpreter(this,sharedMemory);
     public LocalTime getStartTime() {
         return startTime;
     }
@@ -95,8 +100,11 @@ public class AgentHandler {
             AgentManager.getInstance().saveFlight(this);
     }
     public void writeToClient(String line){
-        logger.info("Writing to agent : "+ line);
-        out.println(line);
+        new Thread(()->{
+            out.println(line);
+            logger.info("Writing to agent : "+ line);
+            interpreter.run(line);
+        }).run();
     }
     public void writeToClient(String[] lines){
         for (String line : lines) {
