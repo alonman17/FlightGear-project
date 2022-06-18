@@ -43,7 +43,7 @@ public class EqualsCommand implements Command{
             sharedMemory.symbolTable.get(tokens.get(index - 1))
                     .setValue(result);
             if(sharedMemory.isBind.containsKey(tokens.get(index-1))) {
-                String change = sharedMemory.isBind.get(tokens.get(index - 1)).getBindTo() + " set " + result;
+                String change ="set " + sharedMemory.isBind.get(tokens.get(index - 1)).getBindTo() + " " + result;
                 agentHandler.writeToClient(change);
             }
 

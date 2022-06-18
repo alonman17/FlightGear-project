@@ -98,9 +98,9 @@ public class LiveFlightsController {
         System.out.println(id + " " + data);
     }
     @PostMapping ("api/liveFlights/intepater/{id}")
-    public void sendDataToInterpeter(@PathVariable("id") int id,@RequestBody String data){
+    public String sendDataToInterpeter(@PathVariable("id") int id, @RequestBody String data){
         service.sendDataToInterpeter(id,data);
-        System.out.println(data);
+        return "ok";
     }
     @GetMapping("api/liveFlights/test")
     public String test(){

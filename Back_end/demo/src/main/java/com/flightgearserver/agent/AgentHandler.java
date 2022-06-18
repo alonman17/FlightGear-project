@@ -20,7 +20,7 @@ public class AgentHandler {
     private volatile boolean stop=false;
     private int id;
     private final LocalTime startTime=LocalTime.now();
-
+    private Thread interpreterThread;
     public SharedMemory sharedMemory = new SharedMemory();
 
     public Interpreter interpreter = new Interpreter(this,sharedMemory);
@@ -83,6 +83,9 @@ public class AgentHandler {
                         for (int i = 0; i < values.length; i++) {
                             String[] temp = values[i].split(":");
                             flightLiveValues.setSingleValue(temp[0], Double.parseDouble(temp[1]));
+                            if(sharedMemory.varNameToAgentVarName.containsKey(temp[0])){
+                                sharedMemory.symbolTable.get(sharedMemory.varNameToAgentVarName.get(temp[0])).setValue((float) Double.parseDouble(temp[1]));
+                            }
                             stringBuilder.append(temp[1] + ",");
                         }
                         //logger.info(stringBuilder.toString());
@@ -93,11 +96,16 @@ public class AgentHandler {
                     }
                     catch (Exception e){
                         logger.error("Error in reading data from agent");
+                        logger.error(e.getMessage());
+                        stop=true;
                     }
                 }
                 close();
+                interpreterThread.interrupt();
+                //AgentManager.getInstance().saveFlight(this);
             }).run();
-            //AgentManager.getInstance().saveFlight(this);
+
+
     }
     public void writeToClient(String line){
         new Thread(()->{
@@ -117,6 +125,12 @@ public class AgentHandler {
         AgentManager.getInstance().removeAgent(id);
     }
     public void interpate(String line){
-        interpreter.run(line);
+        interpreterThread= new Thread(()->{
+            while (!stop)
+            interpreter.run(line);
+        });
+        interpreterThread.start();
+
+
     }
 }

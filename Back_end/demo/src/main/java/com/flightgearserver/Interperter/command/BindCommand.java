@@ -35,6 +35,7 @@ public class BindCommand implements Command{
         Double varValue = agent.getFlightLiveValues().values.get(agentvarName);
         sharedMemory.symbolTable.get(varName).setValue(Float.parseFloat(String.valueOf(varValue)));
         sharedMemory.isBind.get(varName).setValue(Float.parseFloat(String.valueOf(varValue)));
+        sharedMemory.varNameToAgentVarName.put(agentvarName,varName);
     }
     private String getAgentVarName(String varName){
         String[] strings = varName.split("/");

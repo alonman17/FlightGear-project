@@ -17,10 +17,11 @@ public class SharedMemory {
 
     public ConcurrentHashMap<String, Variable> symbolTable;
     public ConcurrentHashMap<String, Variable> isBind;
-
+    public ConcurrentHashMap<String, String> varNameToAgentVarName;
     public SharedMemory() {
         this.symbolTable = new ConcurrentHashMap<>();
         this.isBind = new ConcurrentHashMap<>();
+        this.varNameToAgentVarName = new ConcurrentHashMap<>();
     }
 
     public static double calc(String exp){

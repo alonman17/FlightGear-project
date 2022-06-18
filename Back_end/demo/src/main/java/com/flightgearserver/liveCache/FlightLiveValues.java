@@ -2,6 +2,7 @@ package com.flightgearserver.liveCache;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Used to manage live values from a single flight
@@ -10,7 +11,7 @@ public class FlightLiveValues {
     public Map<String,Double> values;
 
     public FlightLiveValues() {
-        this.values=new HashMap<>();
+        this.values=new ConcurrentHashMap<>();
     }
 
     /**

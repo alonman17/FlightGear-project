@@ -4,7 +4,7 @@ rudder
 flaps
 slats
 speedbrake
-throttle0
+throttle
 throttle1
 engine-pump0
 engine-pump1
@@ -39,4 +39,5 @@ magnetic-compass_indicated-heading-deg
 slip-skid-ball_indicated-slip-skid
 turn-indicator_indicated-turn-rate
 vertical-speed-indicator_indicated-speed-fpm
+offset-deg
 engine_rpm
