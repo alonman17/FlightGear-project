@@ -27,6 +27,7 @@ public class AgentController {
 
         try {
             backeEndSocket = new Socket(ip, port);
+            System.out.println("Connected to DB");
         } catch (IOException e) {
             e.printStackTrace();
         }
