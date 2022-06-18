@@ -54,7 +54,8 @@ public class DataHandler {
         for (int i = 0; i < dataValues.length; i++) {
             sb.append(symbols[i] + dataValues[i] + ",");
         }
-        sb.append("\n");
+
+        sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
 
     }

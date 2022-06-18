@@ -24,6 +24,7 @@ public class Pilot implements Ipilot {
     @Override
     public void sendCommands(String command) {
         // send the command to flight gear
+        pilot.sendCommand2fg(command);
     }
 
     @Override

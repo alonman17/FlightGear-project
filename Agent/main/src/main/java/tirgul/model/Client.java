@@ -48,8 +48,8 @@ public class Client {
         }
     }
 
-    public void sendCommand2fg(String command, double value) {
-        out2fg.println(command + " " + value);
+    public void sendCommand2fg(String command) {
+        out2fg.println(command);
         out2fg.flush();
     }
 
