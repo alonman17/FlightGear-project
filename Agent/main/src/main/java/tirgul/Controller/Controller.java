@@ -10,7 +10,8 @@ public class Controller {
         controller = new AgentController();
         System.out.println("Trying to connect to Backend ...");
         controller.connectToBackendServer("127.0.0.1", 5500);
-        System.out.println("Connected to Backend Server");
         new Thread(() -> controller.streamDataFromFG(AgentServer.clientSocket)).start();
+        new Thread(() -> controller.getInstructionsFromBackend()).start();
+
     }
 }

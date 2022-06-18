@@ -33,7 +33,8 @@ public class Client {
 
         try {
 
-            BufferedReader br = new BufferedReader(new FileReader(new File("Agent/main/src/main/resources/properties.txt")));
+            BufferedReader br = new BufferedReader(
+                    new FileReader(new File("Agent/main/src/main/resources/properties.txt")));
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -49,9 +50,10 @@ public class Client {
         }
     }
 
-    public void sendCommand2fg(String command, double value) {
-        out2fg.println(command + " " + value);
+    public void sendCommand2fg(String command) {
+        out2fg.println(command);
         out2fg.flush();
+        System.out.println("COMMAND: " + "'" + command + "'" + " Recived.");
     }
 
     public void setAileron(double x) {

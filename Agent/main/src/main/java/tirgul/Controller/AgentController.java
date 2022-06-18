@@ -26,8 +26,9 @@ public class AgentController {
     public void connectToBackendServer(String ip, int port) {
 
         try {
-            backeEndSocket = new Socket(ip, port);
-           
+            this.backeEndSocket = new Socket(ip, port);
+            System.out.println("Connected to Backend");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,19 +54,19 @@ public class AgentController {
 
     }
 
-    public void getInstructionsFromDB() {
+    public void getInstructionsFromBackend() {
 
         StringBuilder sb = new StringBuilder();
         try {
-            Scanner inFromDB = new Scanner(new InputStreamReader(backeEndSocket.getInputStream()));
-
-            while (inFromDB.hasNext()) {
-                sb.append(inFromDB.nextLine());
+            Scanner inFromBackend = new Scanner(new InputStreamReader(backeEndSocket.getInputStream()));
+            while (inFromBackend.hasNext()) {
+                sb.append(inFromBackend.nextLine());
+                pilot.sendCommands(sb.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(sb.toString());
         pilot.sendCommands(sb.toString());
     }
 
