@@ -28,6 +28,7 @@ public class AgentController {
         try {
             this.backeEndSocket = new Socket(ip, port);
             System.out.println("Connected to Backend");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
