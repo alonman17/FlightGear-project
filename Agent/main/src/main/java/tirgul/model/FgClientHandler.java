@@ -33,7 +33,7 @@ public class FgClientHandler implements ClientHandler {
 
         try {
 
-            BufferedReader bf = new BufferedReader(new FileReader("symbol.txt"));
+            BufferedReader bf = new BufferedReader(new FileReader("Agent/main/src/main/resources/symbol.txt"));
             StringBuilder sb = new StringBuilder();
             String line = null;
 
@@ -62,7 +62,7 @@ public class FgClientHandler implements ClientHandler {
 
     public File getCsv(String fileName) {
 
-        File csvFile = new File("symbol.txt");
+        File csvFile = new File("Agent/main/src/main/resources/symbol.txt");
         return csvFile;
 
     }

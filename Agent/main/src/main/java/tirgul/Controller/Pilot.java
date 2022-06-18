@@ -17,7 +17,7 @@ public class Pilot implements Ipilot {
 
     @Override
     public void handleInstractions() {
-        // TODO: Instractions given from DB shuld be scaned and maped to the write
+        // TODO: Instractions given from DB shuld be scaned and maped to the right
         // command
     }
 

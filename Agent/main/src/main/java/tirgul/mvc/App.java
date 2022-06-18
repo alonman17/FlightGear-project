@@ -30,13 +30,8 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         PrimaryController pc = new PrimaryController();
-
-        Model model = new Model();
-
-        ViewServer backendServer = new ViewServer(5500);
-        new Thread(() -> backendServer.startServer()).start();
-
-        Controller controller = new Controller();
+        
+        AgentRun agent = new AgentRun();
 
     }
 

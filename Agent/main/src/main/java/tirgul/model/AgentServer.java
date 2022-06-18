@@ -12,9 +12,9 @@ public class AgentServer {
     int port;
     FgClientHandler fgClient;
     ServerSocket agentServer;
-    public static Socket client;
+    public static Socket clientSocket;
 
-    static public boolean connected;
+    static public volatile boolean connected;
     static public volatile boolean stop = false;
 
     public AgentServer() {
@@ -36,13 +36,14 @@ public class AgentServer {
 
             while (!stop) {
 
-                client = agentServer.accept();
+                clientSocket = agentServer.accept();
                 System.out
-                        .println("Client is connected from: " + client.getInetAddress() + " PORT: " + client.getPort());
+                        .println(" Flight-Gear Client connected from: " + clientSocket.getInetAddress() + " PORT: "
+                                + clientSocket.getPort());
                 connected = true;
                 try {
-                    fgClient.handleClient(new InputStreamReader(client.getInputStream()),
-                            new OutputStreamWriter(client.getOutputStream()));
+                    fgClient.handleClient(new InputStreamReader(clientSocket.getInputStream()),
+                            new OutputStreamWriter(clientSocket.getOutputStream()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -59,7 +60,7 @@ public class AgentServer {
     public void stopServer() {
         stop = true;
         try {
-            client.close();
+            clientSocket.close();
             agentServer.close();
 
         } catch (Exception e) {
