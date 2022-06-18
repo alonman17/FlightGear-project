@@ -97,13 +97,12 @@ public class AgentHandler {
                 }
                 close();
             }).run();
-            AgentManager.getInstance().saveFlight(this);
+            //AgentManager.getInstance().saveFlight(this);
     }
     public void writeToClient(String line){
         new Thread(()->{
             out.println(line);
             logger.info("Writing to agent : "+ line);
-            interpreter.run(line);
         }).run();
     }
     public void writeToClient(String[] lines){
@@ -117,5 +116,7 @@ public class AgentHandler {
         out.close();
         AgentManager.getInstance().removeAgent(id);
     }
-
+    public void interpate(String line){
+        interpreter.run(line);
+    }
 }

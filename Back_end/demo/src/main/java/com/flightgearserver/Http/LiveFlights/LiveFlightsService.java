@@ -44,6 +44,6 @@ public class LiveFlightsService {
     }
     //TODO: implement this
     public void sendDataToInterpeter(int id, String data) {
-        manager.getAgent(id).writeToClient(data);
+        manager.getAgent(id).interpate(data);
     }
 }

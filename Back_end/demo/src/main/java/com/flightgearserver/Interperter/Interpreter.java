@@ -14,7 +14,6 @@ public class Interpreter {
         this.agentHandler = agentHandler;
         this.parser = new Parser(this.sharedMemory, this.agentHandler);
     }
-
     public void run(String code){
         this.parser.parse(Lexer.lexer(code));
     }

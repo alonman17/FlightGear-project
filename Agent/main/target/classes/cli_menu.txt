@@ -1,9 +1,0 @@
-Welcome to the Flight Grear Server.
-Please choose an option:
-1. ShoutDown
-2. Reset
-3. Print Stream
-4. Set Aileron
-5. Set Rudder
-6. Set Elevator
-7. Set Thruttle
