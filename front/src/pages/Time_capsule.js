@@ -11,21 +11,26 @@ import Horizon from "../components/clocks/horizon";
 import Turn from "../components/clocks/turn";
 import { useState } from "react";
 import DiscreteSlider from "../components/videoSlider";
+import LongMenu from "../components/speedButton";
 
 export default function TimeCapsule() {
   const [val, setValue] = useState(0);
+  const [speed, setSpeed] = useState(0);
   // function c() {
   //   // setValue(0.5);
   //   console.log(val);
   // }
+
   function otomaticSlider() {
     const time = setInterval(() => {
-      setValue(val + 0.01);
+      setValue((val + 0.05) * speed);
 
-      if (val === 1) {
-        clearInterval(time);
-      }
-    }, 10);
+      // if (val >= 0.5) {
+      //   console.log(val);
+      //   clearInterval(time);
+      // }
+      clearInterval(time);
+    }, 500);
   }
 
   otomaticSlider();
@@ -100,11 +105,21 @@ export default function TimeCapsule() {
           </b>
           <b style={{ textAlign: "center" }}>
             Vertical speed
-            <VerticalSpeed />{" "}
+            <VerticalSpeed />
           </b>
         </div>
         <div>
           <DiscreteSlider val={val} setValue={setValue} />
+        </div>
+        <div
+          style={{
+            backgroundColor: "blue",
+            position: "absolute",
+            left: "40%",
+            top: "15%",
+          }}
+        >
+          <LongMenu speed={speed} setSpeed={setSpeed} />
         </div>
       </div>
     </div>
