@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React , { useState } from 'react'
 import {
   MapContainer,
   Marker,
@@ -6,6 +6,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet'
+import { Redirect } from 'react-router-dom';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
@@ -31,27 +32,28 @@ function aircraftPosition(position) {
 
 
 function Map(props) {
-
+  const Obj = props.data
+  const AllairCrafts= Object.keys( props.data)
+  console.log(Obj) 
+  console.log(AllairCrafts)
     const MarkersLists = () => { 
-      const Obj = props.data
-      const AllairCrafts= Object.keys( props.data)
         return (
             <div>
               {
                     AllairCrafts.map((id) => (
                         <div key={id}>
                             <Marker eventHandlers={{
-                             
-                            }} position={aircraftPosition({'lat':51.505,'long': -0.09})} icon={L.divIcon({
+                             dblclick:()=>{ window.location.href =`http://localhost:3000/monitoring/${id}` }
+                            }} position={aircraftPosition({'lat':Obj[`${id}`]['values']['latitude-deg'],'long':Obj[`${id}`]['values']['longitude-deg']})} icon={L.divIcon({
                                 className: "my-custom-pin",
-                                html:`<div style="transform:rotate(${Obj[`${id}`]['latitude-deg"']}deg);">${iconMarkup} </div>`
+                                html:`<div style="transform:rotate(${Obj[`${id}`]['values']['latitude-deg']}deg);">${iconMarkup} </div>`
                             })} >
                                 <Popup  ><div>
                                             <ul style={{fontSize:'20px',position:'relative' ,marginLeft:'-2vw'}}>
-                                                <li>Name:{2} </li>
-                                                {/* <li>Yaw:{Obj[`${id}`]['latitude-deg"']} </li>
-                                                <li>Speed:{Obj[`${id}`]['airspeed-kt']} </li>
-                                                <li>Height:{Obj[`${id}`]['altitude-ft']} </li> */}
+                                                <li>Name:{id} </li>
+                                                <li>Yaw:{Obj[id]['values']['latitude-deg']} </li>
+                                                <li>Speed:{Obj[`${id}`]['values']['airspeed-kt']} </li>
+                                                <li>Height:{Obj[`${id}`]['values']['altitude-ft']} </li>
                                             </ul>
                                     </div></Popup>
                             </Marker>
@@ -73,7 +75,7 @@ function Map(props) {
 
 
   return (
-    <MapContainer center={{ lat: 51.505, lng: -0.09 }} zoom={13}>
+    <MapContainer center={{ lat: 63.991836228, lng:  -22.6054263253 }} zoom={13}>
       <TileLayer
         attribution=''
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -82,4 +84,4 @@ function Map(props) {
     </MapContainer>
   )
 }
-export default Map
+export default React.memo( Map)

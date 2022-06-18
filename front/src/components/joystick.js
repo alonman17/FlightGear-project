@@ -1,9 +1,11 @@
-import React ,{ useMemo, useRef, useState } from 'react';
+import React ,{ useMemo, useRef, useState ,useEffect } from 'react';
+import {useParams} from "react-router-dom";
 import { Joystick } from 'react-joystick-component';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Tilt from 'react-parallax-tilt';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
+import axios from 'axios';
 function GobeJoystickController({
     move,
     start,
@@ -56,27 +58,42 @@ function GobeJoystickController({
 
 
 
-export default function JoystickComp(){
+ function JoystickComp(props){
     const [[manualTiltAngleX, manualTiltAngleY], setManualTiltAngle] = useState([0, 0]);
+    const [aileron,setAileron] = useState(0)
+    const [throttle ,setThrottle] = useState(0)
+  
+    const { id } = useParams();//air-craft id 
 
+    // setInterval(()=>{
+    //   sendCommand()
+    // },200)
+
+   const sendCommand = ()=>{
+    const obj ={
+    x : manualTiltAngleX,
+    y : manualTiltAngleY,
+    aileron : aileron,
+    throttle:throttle}
+    axios.post(`/api/liveFlights/${id}`,obj)
+   }
     const handleMove = (e) => {
         setManualTiltAngle([e.y, e.x]);
-
         let x = e.x/50
         let y = e.y/50
-        if(e.direction==="BACKWARD" ||e.direction==="FORWARD"){
-            console.log("UP or DOWN (" +x+','+y+')');
-        }else{
-            console.log("LEFT or RIGHT (" +x+','+y+')');
-        }
+        // if(e.direction==="BACKWARD" ||e.direction==="FORWARD"){
+        //     console.log("UP or DOWN (" +x+','+y+')');
+        // }else{
+        //     console.log("LEFT or RIGHT (" +x+','+y+')');
+        // }
       };
       const handleStop = (e) => {
         setManualTiltAngle([0, 0]);
 
-        console.log("STOP");
+        // console.log("STOP");
       };
       const handleStart = (e) => {
-        console.log("START");
+        // console.log("START");
       };
      
 return(
@@ -100,7 +117,7 @@ return(
                 min={0}
                 step={0.01}
                 max={1}
-                onChange={(e)=>console.log(e.target.value)}
+                onChange={(e)=>setAileron(e.target.value)}
                 />
     
                  <Tilt tiltAngleXManual={manualTiltAngleX} tiltAngleYManual={manualTiltAngleY} glareEnable={true}>
@@ -125,7 +142,7 @@ return(
                 aria-label="joystick"
                 defaultValue={0}
                 valueLabelDisplay="auto"
-                onChange={(e)=>console.log(e.target.value)}
+                onChange={(e)=>setThrottle(e.target.value)}
                 min={0}
                 step={0.01}
                 max={1}
@@ -134,3 +151,4 @@ return(
 );
 
 }
+export default React.memo(JoystickComp)

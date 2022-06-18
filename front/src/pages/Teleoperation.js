@@ -1,9 +1,17 @@
+import { useState } from "react"
 import Sidebar from "../components/nav-bar/nav_bar"
 import JoystickComp from "../components/joystick"
+import {useParams} from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Button } from "@mui/material";
+import axios from "axios"
 export default function Teleoperation (){
+    const { id } = useParams();//air-craft id 
+    const [code,setCode]=useState('')
+    const sendSimCode = ()=>{
+    axios.post(`/api/liveFlights/${id}`).then(alert("send code !"))
+    }
     return (<div >
         <Sidebar />
         <h1 style={{position:'absolute',left:'40%' , top:'10%'}}> Teleoperation</h1>
@@ -16,10 +24,10 @@ export default function Teleoperation (){
                 style={{ minHeight: '130px',width:'300px' }}
                 />
             </FloatingLabel>
-            <Form.Text id="inputText" >
+            <Form.Text id="inputText" onChange={(e)=>setCode(e.target)} >
                 Your Code must be compatible with the language of Simulator. 
             </Form.Text>
-            <Button style={{position:'relative' , left:'8vw'}} size="large" color="secondary">submit</Button>
+            <Button style={{position:'relative' , left:'8vw'}} size="large" onClick={sendSimCode} color="secondary">submit</Button>
         </div>
         <div  style={{position:'absolute' , left:'45%',top:'37%' }}>
             <JoystickComp />

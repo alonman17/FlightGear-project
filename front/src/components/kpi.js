@@ -56,7 +56,7 @@ function a11yProps(index) {
   };
 }
 
-export default function KPI() {
+function KPI(props) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -66,7 +66,7 @@ export default function KPI() {
     datasets: [
       {
         label: '# of Votes',
-        data: [80, 20],
+        data: [  1- props.percent, props.percent],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -120,7 +120,8 @@ export default function KPI() {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
             <Paper style={{display:'flex',justifyContent:'center'}} sx={{flexWrap: 'wrap' }} variant="outlined" square>
-                  <BarChart />
+                  <h2> Nautical miles per aircraft (this month):</h2>
+                  <BarChart object={props.miles_air} />
             </Paper>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
@@ -139,19 +140,17 @@ export default function KPI() {
                     minWidth:300,
                     minHeight:200,
                     }} variant="outlined" square>
-               <LineChart />
+               <LineChart object={props.fleetSize} />
             </Paper>
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-            <Paper sx={{flexWrap: 'wrap',
-                    m: 1,
-                    minWidth:300,
-                    minHeight:200,
-                    }} variant="outlined" square>
-                Item Four
+              <Paper style={{display:'flex',justifyContent:'center'}} sx={{flexWrap: 'wrap' }} variant="outlined" square>
+                  <h2> Nautical miles per fleet (this year):</h2>
+                  <BarChart object={props.miles_all } />
             </Paper>
         </TabPanel>
       </SwipeableViews>
     </Box>
   );
 }
+export default React.memo(KPI)

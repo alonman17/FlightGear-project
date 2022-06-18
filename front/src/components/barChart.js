@@ -28,29 +28,25 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Bar Chart',
+      text: ' Bar Chart',
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
-export function BarChart() {
-  return <Bar options={options} data={data} />;
+export function BarChart(props) {
+  const labels=Object.keys(props.object)
+  console.log(labels + " "+ props.object[labels[0]])
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset',
+        data: labels.map((key) => props.object[key]),
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+     
+    ],
+  };
+  return  <Bar options={options} data={data} />;
 }
