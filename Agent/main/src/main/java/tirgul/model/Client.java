@@ -33,7 +33,7 @@ public class Client {
 
         try {
 
-            BufferedReader br = new BufferedReader(new FileReader(new File("src/main/resources/properties.txt")));
+            BufferedReader br = new BufferedReader(new FileReader(new File("Agent/main/src/main/resources/properties.txt")));
 
             String line;
             while ((line = br.readLine()) != null) {

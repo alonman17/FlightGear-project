@@ -33,8 +33,8 @@ public class FgClientHandler implements ClientHandler {
 
         try {
 
-            BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/symbol.txt"));
-          
+            BufferedReader bf = new BufferedReader(new FileReader("Agent/main/src/main/resources/symbol.txt"));
+
             StringBuilder sb = new StringBuilder();
             String line = null;
 
