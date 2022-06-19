@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 
-const options = ["0.1", "1x", "1.5x", "2x"];
+const options = ["1x", "1.5x", "2x"];
 
 const ITEM_HEIGHT = 48;
 
@@ -18,13 +18,13 @@ export default function LongMenu(props) {
   };
   const handleClose = (option) => {
     //close the menu
-    //close the menu
     setAnchorEl(null);
     // props.setSpeed();
   };
   function on(option) {
     const s = option.currentTarget.innerText.split("x")[0];
     props.setSpeed(s);
+    setAnchorEl(null);
   }
 
   return (

@@ -12,10 +12,12 @@ import Turn from "../components/clocks/turn";
 import { useState } from "react";
 import DiscreteSlider from "../components/videoSlider";
 import LongMenu from "../components/speedButton";
+import OnlyPlayPauseButton from "../components/playButton";
 
 export default function TimeCapsule() {
   const [val, setValue] = useState(0);
   const [speed, setSpeed] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   // function c() {
   //   // setValue(0.5);
   //   console.log(val);
@@ -23,8 +25,9 @@ export default function TimeCapsule() {
 
   function otomaticSlider() {
     const time = setInterval(() => {
-      setValue((val + 0.05) * speed);
-
+      if (isPlaying) {
+        setValue((val + 0.05) * speed);
+      }
       // if (val >= 0.5) {
       //   console.log(val);
       //   clearInterval(time);
@@ -113,13 +116,27 @@ export default function TimeCapsule() {
         </div>
         <div
           style={{
-            backgroundColor: "blue",
+            backgroundColor: "#1e90ff",
             position: "absolute",
-            left: "40%",
-            top: "15%",
+            left: "35%",
+            top: "16%",
           }}
         >
           <LongMenu speed={speed} setSpeed={setSpeed} />
+        </div>
+        <div
+          style={{
+            backgroundColor: "#1e90ff",
+
+            position: "absolute",
+            left: "40%",
+            top: "16%",
+          }}
+        >
+          <OnlyPlayPauseButton
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+          />
         </div>
       </div>
     </div>
