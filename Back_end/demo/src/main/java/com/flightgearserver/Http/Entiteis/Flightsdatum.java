@@ -553,5 +553,54 @@ public class Flightsdatum {
         this.engineRpm = engineRpm;
     }
 
+    @Override
+    public String toString() {
+        return
+                id +
+                "," + flightid +
+                "," + timestamp +
+                "," + aileron +
+                "," + elevator +
+                "," + rudder +
+                "," + flaps +
+                "," + slats +
+                "," + speedbrake +
+                "," + throttle0 +
+                "," + throttle1 +
+                "," + enginePump0 +
+                "," + enginePump1 +
+                "," + electricPump0 +
+                "," + electricPump1 +
+                "," + externalPower +
+                "," + apuGenerator +
+                "," + latitudeDeg +
+                "," + longitudeDeg +
+                "," + altitudeFt +
+                "," + rollDeg +
+                "," + pitchDeg +
+                "," + headingDeg +
+                "," + sideSlipDeg +
+                "," + airspeedKt +
+                "," + glideslope +
+                "," + verticalSpeedFps +
+                "," + airspeedIndicatorIndicatedSpeedKt +
+                "," + altimeterIndicatedAltitudeFt +
+                "," + altimeterPressureAltFt +
+                "," + attitudeIndicatorIndicatedPitchDeg +
+                "," + attitudeIndicatorIndicatedRollDeg +
+                "," + attitudeIndicatorInternalPitchDeg +
+                "," + attitudeIndicatorInternalRollDeg +
+                "," + encoderIndicatedAltitudeFt +
+                "," + encoderPressureAltFt +
+                "," + gpsIndicatedAltitudeFt +
+                "," + gpsIndicatedGroundSpeedKt +
+                "," + gpsIndicatedVerticalSpeed +
+                "," + indicatedHeadingDeg +
+                "," + magneticCompassIndicatedHeadingDeg +
+                "," + slipSkidBallIndicatedSlipSkid +
+                "," + turnIndicatorIndicatedTurnRate +
+                "," + verticalSpeedIndicatorIndicatedSpeedFpm +
+                "," + engineRpm;
 
+    }
 }
