@@ -40,33 +40,50 @@ export default function TimeCapsule() {
     setValue(value);
   };
   const setClock = (i) => {
-    console.log(i);
-    console.log(allFlight[i].airspeedKt);
     setSpeedometer(allFlight[i].airspeedKt);
-    setDirection(allFlight["heading-deg"]);
-    setHeigh(fakeData["altimeter_indicated-altitude-ft"]);
-    setTurn(fakeData["roll-deg"]);
-    setVerticalSpeed(fakeData["vertical-speed-fps"]);
-    setHorizon(fakeData["attitude-indicator_internal-pitch-deg"]);
+    setDirection(allFlight[i].headingDeg);
+    setHeigh(allFlight[i].altimeterIndicatedAltitudeFt);
+    setTurn(allFlight[i].rollDeg);
+    setVerticalSpeed(allFlight[i].verticalSpeedFps);
+    setHorizon(allFlight[i].attitudeIndicatorInternalPitchDeg);
   };
-  const setGr = (i) => {
+  const setGr = () => {
     console.log(value);
-
-    const x = allFlight[i].value;
+    const x = allFlight[0].value;
+    const y=value;
+    console.log(allFlight[0].y);
     if (x != undefined) {
-      console.log(x);
-      data.push(allFlight[i].value);
+      // console.log(x);
+      data.push(allFlight[0].value);
+      data.push(x);
+      console.log(allFlight[0].value);
+
     }
+
+      data.push(x);
     setlabels([...labels, data.length]);
     setData(data);
   };
+
   useEffect(() => {
-    for (let i = 0; i < 10; i++) {
-      setClock(i);
-      setGr(i);
-    }
+    var i = 0;                 
+    setGr(); 
+    // function myLoop() {        
+    //   setTimeout(function() {           
+    //     if (i < 1) { 
+    //         setClock(i);
+    //         // setGr(); 
+    //         i++;       
+    //       myLoop();            
+    //     }                      
+    //   }, 1000)
+    // }
+    
+    // myLoop();  
   }, [value]);
 
+
+//-------------------------
   //interval for updating the data
   // axios
   //   .get("/api/liveFlights/test")
@@ -150,15 +167,15 @@ export default function TimeCapsule() {
             <Speedometer
               speedometer={speedometer}
               setSpeedometer={setSpeedometer}
-            />{" "}
+            />
           </b>
           <b style={{ textAlign: "center" }}>
             Height
-            <Height heigh={heigh} setHeigh={setHeigh} />{" "}
+            <Height heigh={heigh} setHeigh={setHeigh} />
           </b>
           <b style={{ textAlign: "center" }}>
             Horizon
-            <Horizon horizon={horizon} setHorizon={setHorizon} />{" "}
+            <Horizon horizon={horizon} setHorizon={setHorizon} />
           </b>
           <b style={{ textAlign: "center" }}>
             Direction
