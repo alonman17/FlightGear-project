@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactSpeedometer from "react-d3-speedometer";
+import { useState } from "react";
 
-export default function Speedometer() {
+export default function Speedometer(props) {
+  console.log(props);
   return (
-    <div >
+    <div>
       <ReactSpeedometer
-        value={333}
+        value={props.speedometer}
         labelFontSize={"15px"}
         valueTextFontSize={"15px"}
         paddingHorizontal={29}
