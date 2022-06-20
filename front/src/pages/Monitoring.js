@@ -15,19 +15,37 @@ import fakeData from "../components/fakeData";
 
 export default function Monitoring() {
   const [value, setValue] = useState("");
+  const [graph, setGraphData] = useState([0]);
   const [speedometer, setSpeedometer] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [heigh, setHeigh] = useState(0);
+  const [turn, setTurn] = useState(0);
+  const [verticalSpeed, setVerticalSpeed] = useState(0);
+  const [horizon, setHorizon] = useState(0);
+  const [data, setData] = useState([0]);
+
   const SET = (val) => {
     setValue(val);
   };
-  useEffect(() => {
-    console.log(fakeData[value]);
-  }, [value]);
-
   const setClock = () => {
-    const num = fakeData["airspeed-kt"];
-    sp;
-    console.log(speedometer);
+    setSpeedometer(fakeData["airspeed-kt"]);
+    setDirection(fakeData["direction-deg"]);
+    setHeigh(fakeData["height-ft"]);
+    setTurn(fakeData["turn-deg"]);
+    setVerticalSpeed(fakeData["vertical-speed-fps"]);
+    setHorizon(fakeData["horizon-deg"]);
   };
+  const setGr = () => {
+    // console.log(fakeData[value]);
+    setGraphData([fakeData[value]]);
+    setData(data.push(fakeData[value]));
+  };
+  useEffect(() => {
+    console.log(fakeData["airspeed-kt"]);
+    // console.log(fakeData[value]);
+    setGr();
+    setClock();
+  }, [value]);
 
   return (
     <div>
@@ -61,7 +79,7 @@ export default function Monitoring() {
             width: "35vw",
           }}
         >
-          <LineChartMonitoring />
+          <LineChartMonitoring graph={graph} data={data} />
         </div>
         <div
           style={{
@@ -85,23 +103,26 @@ export default function Monitoring() {
           </b>
           <b style={{ textAlign: "center" }}>
             Height
-            <Height />{" "}
+            <Height heigh={heigh} setHeigh={setHeigh} />{" "}
           </b>
           <b style={{ textAlign: "center" }}>
             Horizon
-            <Horizon />{" "}
+            <Horizon horizon={horizon} setHorizon={setHorizon} />{" "}
           </b>
           <b style={{ textAlign: "center" }}>
             Direction
-            <Direction />{" "}
+            <Direction direction={direction} setDirection={setDirection} />{" "}
           </b>
           <b style={{ textAlign: "center" }}>
             Turn
-            <Turn />{" "}
+            <Turn turn={turn} setTurn={setTurn} />{" "}
           </b>
           <b style={{ textAlign: "center" }}>
             Vertical speed
-            <VerticalSpeed />{" "}
+            <VerticalSpeed
+              verticalSpeed={verticalSpeed}
+              setVerticalSpeed={setVerticalSpeed}
+            />{" "}
           </b>
         </div>
       </div>

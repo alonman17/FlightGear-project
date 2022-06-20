@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactSpeedometer from "react-d3-speedometer";
 
-export default function Turn() {
+export default function Turn(props) {
   return (
-    <div >
+    <div>
       <ReactSpeedometer
-        value={10}
+        value={props.turn}
         labelFontSize={"15px"}
         valueTextFontSize={"15px"}
         paddingHorizontal={29}

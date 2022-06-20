@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactSpeedometer from "react-d3-speedometer";
 
-export default function Direction() {
+export default function Direction(props) {
   return (
-    <div >
+    <div>
       <ReactSpeedometer
-        value={100}
+        value={props.direction}
         labelFontSize={"15px"}
         valueTextFontSize={"15px"}
         paddingHorizontal={29}

@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactSpeedometer from "react-d3-speedometer";
 
-export default function Horizon() {
+export default function Horizon(props) {
   return (
-    <div >
+    <div>
       <ReactSpeedometer
-        value={410}
+        value={props.horizon}
         labelFontSize={"15px"}
         valueTextFontSize={"15px"}
         paddingHorizontal={29}
