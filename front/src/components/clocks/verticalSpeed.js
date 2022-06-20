@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactSpeedometer from "react-d3-speedometer";
 
-export default function VerticalSpeed() {
+export default function VerticalSpeed(props) {
   return (
-    <div >
+    <div>
       <ReactSpeedometer
-        value={610}
+        value={props.verticalSpeed}
         labelFontSize={"15px"}
         valueTextFontSize={"15px"}
         paddingHorizontal={29}

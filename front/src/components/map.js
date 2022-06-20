@@ -58,21 +58,12 @@ function Map(props) {
                                     </div></Popup>
                             </Marker>
                         </div>
+              
                     ))
                 }
             </div>)
 
-
-// visibility:${AdminClick && cartClick ===cartInfo.cart_number  ? "none" : "hidden" }; font-size:1em;">`
     }
-
-
-
-
-
-
-
-
 
   return (
     <MapContainer center={{ lat: 63.991836228, lng:  -22.6054263253 }} zoom={13}>
