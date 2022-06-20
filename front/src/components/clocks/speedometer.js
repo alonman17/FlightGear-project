@@ -4,6 +4,7 @@ import ReactSpeedometer from "react-d3-speedometer";
 import { useState } from "react";
 
 export default function Speedometer(props) {
+  console.log(props.speedometer);
   return (
     <div>
       <ReactSpeedometer

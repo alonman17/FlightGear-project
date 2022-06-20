@@ -59,13 +59,12 @@ export default function Monitoring() {
         console.log(err);
       });
   };
-  setInterval(() => {
-   await getDataOfFlight();
-   setClock();
-    setGr();
-  }, 1000);
+  //   setInterval(() => {
+  //    await getDataOfFlight();
+  //    setClock();
+  //     setGr();
+  //   }, 1000);
 
- 
   return (
     <div>
       <Sidebar />

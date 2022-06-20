@@ -17,6 +17,7 @@ import ComplitedFlightsList from "../components/compledFlightsList";
 import { Joystick } from "react-joystick-component";
 import fakeData from "../components/fakeData";
 import axios from "axios";
+import allFlight from "../components/allFlight.json";
 
 export default function TimeCapsule() {
   const [val, setVal] = useState(0);
@@ -32,32 +33,38 @@ export default function TimeCapsule() {
   const [data, setData] = useState([0]);
   const [labels, setlabels] = useState(["start"]);
   const [id, setId] = useState(0);
-
   const SetID = (id) => {
     setId(id);
   };
   const SET = (value) => {
     setValue(value);
   };
-  const setClock = () => {
-    setSpeedometer(fakeData["airspeed-kt"]);
-    setDirection(fakeData["heading-deg"]);
+  const setClock = (i) => {
+    console.log(i);
+    console.log(allFlight[i].airspeedKt);
+    setSpeedometer(allFlight[i].airspeedKt);
+    setDirection(allFlight["heading-deg"]);
     setHeigh(fakeData["altimeter_indicated-altitude-ft"]);
     setTurn(fakeData["roll-deg"]);
     setVerticalSpeed(fakeData["vertical-speed-fps"]);
     setHorizon(fakeData["attitude-indicator_internal-pitch-deg"]);
   };
-  const setGr = () => {
-    const x = fakeData[value];
+  const setGr = (i) => {
+    console.log(value);
+
+    const x = allFlight[i].value;
     if (x != undefined) {
-      data.push(fakeData[value]);
+      console.log(x);
+      data.push(allFlight[i].value);
     }
     setlabels([...labels, data.length]);
     setData(data);
   };
   useEffect(() => {
-    setClock();
-    setGr();
+    for (let i = 0; i < 10; i++) {
+      setClock(i);
+      setGr(i);
+    }
   }, [value]);
 
   //interval for updating the data
