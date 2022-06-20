@@ -12,10 +12,10 @@ import Horizon from "../components/clocks/horizon";
 import Turn from "../components/clocks/turn";
 import { useState, useEffect } from "react";
 import fakeData from "../components/fakeData";
+import axios from "axios";
 
 export default function Monitoring() {
   const [value, setValue] = useState("");
-  const [graph, setGraphData] = useState([0]);
   const [speedometer, setSpeedometer] = useState(0);
   const [direction, setDirection] = useState(0);
   const [heigh, setHeigh] = useState(0);
@@ -23,37 +23,44 @@ export default function Monitoring() {
   const [verticalSpeed, setVerticalSpeed] = useState(0);
   const [horizon, setHorizon] = useState(0);
   const [data, setData] = useState([0]);
-
+  const [labels, setlabels] = useState(["start"]);
   const SET = (val) => {
     setValue(val);
   };
   const setClock = () => {
     setSpeedometer(fakeData["airspeed-kt"]);
-    setDirection(fakeData["direction-deg"]);
-    setHeigh(fakeData["height-ft"]);
-    setTurn(fakeData["turn-deg"]);
+    setDirection(fakeData["heading-deg"]);
+    setHeigh(fakeData["altimeter_indicated-altitude-ft"]);
+    setTurn(fakeData["roll-deg"]);
     setVerticalSpeed(fakeData["vertical-speed-fps"]);
-    setHorizon(fakeData["horizon-deg"]);
+    setHorizon(fakeData["attitude-indicator_internal-pitch-deg"]);
   };
   const setGr = () => {
-    // console.log(fakeData[value]);
-    setGraphData([fakeData[value]]);
-    setData(data.push(fakeData[value]));
+    const x = fakeData[value];
+    if (x != undefined) {
+      data.push(fakeData[value]);
+    }
+    setlabels([...labels, data.length]);
+    setData(data);
   };
   useEffect(() => {
-    console.log(fakeData["airspeed-kt"]);
-    // console.log(fakeData[value]);
-    setGr();
     setClock();
+    setGr();
   }, [value]);
 
+  //interval for updating the data
+  axios
+    .get("/api/liveFlights/test")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   return (
     <div>
       <Sidebar />
-      <h1 style={{ position: "absolute", left: "40%", top: "10%" }}>
-        {" "}
-        Monitoring {value}
-      </h1>
+      <h1 style={{ position: "absolute", left: "40%", top: "10%" }}> Monitoring {value}</h1>
       <div style={{ backgroundColor: "white" }}>
         <div style={{ position: "absolute", left: "25%", top: "25%" }}>
           <VirtualizedList setValue={SET} />
@@ -79,7 +86,7 @@ export default function Monitoring() {
             width: "35vw",
           }}
         >
-          <LineChartMonitoring graph={graph} data={data} />
+          <LineChartMonitoring data={data} labels={labels} />
         </div>
         <div
           style={{
@@ -96,10 +103,7 @@ export default function Monitoring() {
         >
           <b style={{ textAlign: "center" }}>
             Speed
-            <Speedometer
-              speedometer={speedometer}
-              setSpeedometer={setSpeedometer}
-            />{" "}
+            <Speedometer speedometer={speedometer} setSpeedometer={setSpeedometer} />{" "}
           </b>
           <b style={{ textAlign: "center" }}>
             Height
@@ -119,10 +123,7 @@ export default function Monitoring() {
           </b>
           <b style={{ textAlign: "center" }}>
             Vertical speed
-            <VerticalSpeed
-              verticalSpeed={verticalSpeed}
-              setVerticalSpeed={setVerticalSpeed}
-            />{" "}
+            <VerticalSpeed verticalSpeed={verticalSpeed} setVerticalSpeed={setVerticalSpeed} />{" "}
           </b>
         </div>
       </div>
