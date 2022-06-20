@@ -11,10 +11,10 @@ import Height from "../components/clocks/height";
 import Horizon from "../components/clocks/horizon";
 import Turn from "../components/clocks/turn";
 import { useState, useEffect } from "react";
-import fakeData from "../components/fakeData";
 import axios from "axios";
 
 export default function Monitoring() {
+  const [jasonObject, setJasonObject] = useState({});
   const [value, setValue] = useState("");
   const [speedometer, setSpeedometer] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -28,17 +28,17 @@ export default function Monitoring() {
     setValue(val);
   };
   const setClock = () => {
-    setSpeedometer(fakeData["airspeed-kt"]);
-    setDirection(fakeData["heading-deg"]);
-    setHeigh(fakeData["altimeter_indicated-altitude-ft"]);
-    setTurn(fakeData["roll-deg"]);
-    setVerticalSpeed(fakeData["vertical-speed-fps"]);
-    setHorizon(fakeData["attitude-indicator_internal-pitch-deg"]);
+    setSpeedometer(jasonObject["airspeed-kt"]);
+    setDirection(jasonObject["heading-deg"]);
+    setHeigh(jasonObject["altimeter_indicated-altitude-ft"]);
+    setTurn(jasonObject["roll-deg"]);
+    setVerticalSpeed(jasonObject["vertical-speed-fps"]);
+    setHorizon(jasonObject["attitude-indicator_internal-pitch-deg"]);
   };
   const setGr = () => {
-    const x = fakeData[value];
+    const x = jasonObject[value];
     if (x != undefined) {
-      data.push(fakeData[value]);
+      data.push(jasonObject[value]);
     }
     setlabels([...labels, data.length]);
     setData(data);
@@ -49,18 +49,30 @@ export default function Monitoring() {
   }, [value]);
 
   //interval for updating the data
-  axios
-    .get("/api/liveFlights/test")
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const getDataOfFlight = async () => {
+    axios
+      .get("/api/liveFlights/test")
+      .then((res) => {
+        setJasonObject(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  setInterval(() => {
+   await getDataOfFlight();
+   setClock();
+    setGr();
+  }, 1000);
+
+ 
   return (
     <div>
       <Sidebar />
-      <h1 style={{ position: "absolute", left: "40%", top: "10%" }}> Monitoring {value}</h1>
+      <h1 style={{ position: "absolute", left: "40%", top: "10%" }}>
+        {" "}
+        Monitoring {value}
+      </h1>
       <div style={{ backgroundColor: "white" }}>
         <div style={{ position: "absolute", left: "25%", top: "25%" }}>
           <VirtualizedList setValue={SET} />
@@ -103,7 +115,10 @@ export default function Monitoring() {
         >
           <b style={{ textAlign: "center" }}>
             Speed
-            <Speedometer speedometer={speedometer} setSpeedometer={setSpeedometer} />{" "}
+            <Speedometer
+              speedometer={speedometer}
+              setSpeedometer={setSpeedometer}
+            />{" "}
           </b>
           <b style={{ textAlign: "center" }}>
             Height
@@ -123,7 +138,10 @@ export default function Monitoring() {
           </b>
           <b style={{ textAlign: "center" }}>
             Vertical speed
-            <VerticalSpeed verticalSpeed={verticalSpeed} setVerticalSpeed={setVerticalSpeed} />{" "}
+            <VerticalSpeed
+              verticalSpeed={verticalSpeed}
+              setVerticalSpeed={setVerticalSpeed}
+            />{" "}
           </b>
         </div>
       </div>
