@@ -73,14 +73,14 @@ export default function FleetOverview (){
         })
         axios.get('/api/statistics/liveFlightsCount').then(res=>{
             let live = res.data
-            axios.get(`api/statistics/fleetSize/${year}`).then(res=>{
+            axios.get(`api/statistics/fleetSize/${year}`,{mode: 'no-corsx'}).then(res=>{
                 setfleetSizeArr(res.data)
                  setperAircraft(live/res.data)
                 // setperAircraft(0.6)
              })
          })
          
-         axios.get(`/api/statistics/aircraft/all/${month}`).then(res=>{
+         axios.get(`/api/statistics/aircraft/all/${month}`,{mode: 'no-corsx'}).then(res=>{
             let arr= res.data
             // arr.sort((a,b) => (a.millagedone > b.millagedone) ? 1 : ((b.millagedone > a.millagedone) ? -1 : 0))
             let Obj= {}
@@ -90,7 +90,7 @@ export default function FleetOverview (){
             setmilesperAircraft(Obj)
             // setmilesperAircraft(mo)
          })
-         axios.get(`/api/statistics/aircraft/${year}`).then(res=>{
+         axios.get(`/api/statistics/aircraft/${year}`,{mode: 'no-corsx'}).then(res=>{
             setmilesallfleet(res.data)
            //setmilesallfleet(ye)
          })
