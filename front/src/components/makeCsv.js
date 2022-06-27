@@ -1,0 +1,55 @@
+const fs = require("fs");
+const csvToObj = require("csv-to-js-parser").csvToObj;
+
+const data = fs.readFileSync("flightData.csv").toString();
+
+const description = {
+  id: { type: "number", group: 1 },
+  flightid: { type: "number", group: 1 },
+  rudder: { type: "number", group: 1 },
+  timestamp: { type: "number", group: 1 },
+  aileron: { type: "number", group: 1 },
+  elevator: { type: "number", group: 1 },
+  rudder: { type: "number", group: 1 },
+  flaps: { type: "number", group: 1 },
+  slats: { type: "number", group: 1 },
+  speedbrake: { type: "number", group: 1 },
+  throttle0: { type: "number", group: 1 },
+  throttle1: { type: "number", group: 1 },
+  enginePump0: { type: "number", group: 1 },
+  enginePump1: { type: "number", group: 1 },
+  electricPump0: { type: "number", group: 1 },
+  electricPump1: { type: "number", group: 1 },
+  externalPower: { type: "number", group: 1 },
+  apuGenerator: { type: "number", group: 1 },
+  latitudeDeg: { type: "number", group: 1 },
+  longitudeDeg: { type: "number", group: 1 },
+  altitudeFt: { type: "number", group: 1 },
+  rollDeg: { type: "number", group: 1 },
+  pitchDeg: { type: "number", group: 1 },
+  headingDeg: { type: "number", group: 1 },
+  sideSlipDeg: { type: "number", group: 1 },
+  airspeedKt: { type: "number", group: 1 },
+  glideslope: { type: "number", group: 1 },
+  verticalSpeedFps: { type: "number", group: 1 },
+  airspeedIndicatorIndicatedSpeedKt: { type: "number", group: 1 },
+  altimeterIndicatedAltitudeFt: { type: "number", group: 1 },
+  altimeterPressureAltFt: { type: "number", group: 1 },
+  attitudeIndicatorIndicatedPitchDeg: { type: "number", group: 1 },
+  attitudeIndicatorInternalPitchDeg: { type: "number", group: 1 },
+  attitudeIndicatorInternalRollDeg: { type: "number", group: 1 },
+  encoderPressureAltFt: { type: "number", group: 1 },
+  gpsIndicatedGroundSpeedKt: { type: "number", group: 1 },
+  gpsIndicatedVerticalSpeed: { type: "number", group: 1 },
+  attitudeIndicatorIndicatedPitchDeg: { type: "number", group: 1 },
+  indicatedHeadingDeg: { type: "number", group: 1 },
+  magneticCompassIndicatedHeadingDeg: { type: "number", group: 1 },
+  slipSkidBallIndicatedSlipSkid: { type: "number", group: 1 },
+  turnIndicatorIndicatedTurnRate: { type: "number", group: 1 },
+  gpsIndicatedVerticalSpeed: { type: "number", group: 1 },
+  verticalSpeedIndicatorIndicatedSpeedFpm: { type: "number", group: 1 },
+  engineRpm: { type: "number", group: 1 },
+};
+let obj = csvToObj(data, ",", description);
+const json = JSON.stringify(obj, null, " ");
+fs.writeFileSync("allFlight.json", json);

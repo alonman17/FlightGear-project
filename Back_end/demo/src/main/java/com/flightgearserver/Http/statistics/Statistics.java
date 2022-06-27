@@ -14,7 +14,7 @@ public class Statistics {
     //TODO: implement
    public static List<Map<String, Double>> getMillagePerMonthAll(List<Flight> flights, int month){
        List<Map<String,Double>> list=new ArrayList<>();
-       flights.stream().filter(f -> f.getDate().getMonthValue() == month).forEach(f->{
+       flights.stream().filter(f -> f.getDate().getMonthValue() == month).sorted((f1,f2)-> (int) (f1.getId()-f2.getId())).forEach(f->{
            Map<String,Double> x=new HashMap<>();
            x.put("aircraftid", Double.valueOf(f.getAircraftid()));
            x.put("millagedone",f.getMilagedone());
